@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="name">Name:</string>
+    <string name="totalPrice">TOTAL Prize:</string>
+    <string name="rent">Rent</string>
+    <string name="hintName">Name</string>
+    <string name="surnames">Surnames:</string>
+    <string name="hintSurname">Surnames</string>
+    <string name="vehicle">Vehicle:</string>
+    <string-array name="vehicles_array">
+        <item>Car</item>
+        <item>Motorbike 10€ / day</item>
+        <item>Scooter 5€ / day</item>
+    </string-array>
+    <string name="fuel">Fuel:</string>
+    <string-array name="fuel_array">
+        <item>Diesel 25€ / día</item>
+        <item>Gasoline 20€ / día</item>
+        <item>Electric 15€ / día</item>
+    </string-array>
+    <string-array name="no_fuel_array">
+        <item>Not Available</item>
+    </string-array>
+    <string name="rentDays">Days:</string>
+    <string name="gmail">Gmail</string>
+    <string name="about">About...</string>
+    <string name="aboutContent">Application version: 0.1\nAuthor: Adrian Carmona</string>
+    <string name="errorFillFields">You must fill in everything before continuing.</string>
+</resources>
