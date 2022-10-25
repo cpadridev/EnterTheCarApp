@@ -3,6 +3,9 @@ package com.cpadridev.carmonaadrian_enterthecar
 import android.os.Parcel
 import android.os.Parcelable
 
+/**
+@author: Adrian Carmona
+ */
 data class Person(val name: String, val surnames: String, val vehicleType: String, val fuelType: String?, val gps: Boolean, val days: Int) :
     Parcelable {
     companion object CREATOR: Parcelable.Creator<Person> {
