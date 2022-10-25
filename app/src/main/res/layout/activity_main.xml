@@ -124,20 +124,33 @@
             style="@style/linearsCenter">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:gravity="center"
                 android:text="@string/totalPrice"
                 android:textSize="20dp" />
 
             <TextView
                 android:id="@+id/totalPrice"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center"
-                android:textSize="20dp" />
+                android:gravity="center_vertical"
+                android:textAlignment="textEnd"
+                android:text="0"
+                android:textSize="20dp"
+                tools:ignore="RtlCompat" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:textAlignment="textStart"
+                android:text=" €"
+                android:textSize="20dp"
+                tools:ignore="RtlCompat" />
         </LinearLayout>
     </LinearLayout>
 
