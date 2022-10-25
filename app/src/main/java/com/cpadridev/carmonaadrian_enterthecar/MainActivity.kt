@@ -1,6 +1,5 @@
 package com.cpadridev.carmonaadrian_enterthecar
 
-import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -13,9 +12,6 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.view.get
 import androidx.core.view.isVisible
 import com.cpadridev.carmonaadrian_enterthecar.databinding.ActivityMainBinding
 
@@ -25,18 +21,7 @@ import com.cpadridev.carmonaadrian_enterthecar.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
-    companion object {
-        const val DATA_RETURNED: String = "DATA RETURNED"
-        const val DEFAULT_VALUE: Int = 0
-    }
-
-    private val resultOrderSummary = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val dataResult = result.data
-        }
-    }
-
-    private var price: Int = 25
+    private var price: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -44,6 +29,7 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
+        // Creation of the vehicle spinner.
         ArrayAdapter.createFromResource(
             this,
             R.array.vehicles_array,
@@ -55,20 +41,27 @@ class MainActivity : AppCompatActivity() {
 
         binding.vehiclesSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
+                // Item selected
                 val item = binding.vehiclesSpinner.getItemAtPosition(pos).toString()
+                // Get an array from string resources
                 val vehiclesArray = resources.getStringArray(R.array.vehicles_array)
 
+                // Disable no fuel
                 binding.noFuelSpinner.isEnabled = false
                 binding.fuelSpinner.isVisible = item == vehiclesArray[0]
                 binding.noFuelSpinner.isVisible = item != vehiclesArray[0]
 
+                // Change the price depending on the selected vehicle
                 when(item) {
                     vehiclesArray[1] -> price = 10
                     vehiclesArray[2] -> price = 5
                 }
 
+                // Calculate the price
                 if (binding.rentDays.text.isNotEmpty()) {
-                    binding.totalPrice.text = (price * Integer.parseInt(binding.rentDays.text.toString())).toString()
+                    binding.totalPrice.text = (price * binding.rentDays.text.toString().toInt()).toString()
+                } else {
+                    binding.totalPrice.text = "0"
                 }
             }
 
@@ -77,6 +70,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        // Creation of the fuel spinner.
         ArrayAdapter.createFromResource(
             this,
             R.array.fuel_array,
@@ -97,8 +91,11 @@ class MainActivity : AppCompatActivity() {
                     fuelsArray[2] -> price = 15
                 }
 
-                if (binding.rentDays.text.isNotEmpty()) {
-                    binding.totalPrice.text = (price * Integer.parseInt(binding.rentDays.text.toString())).toString()
+                if (binding.rentDays.text.isNotEmpty())
+                {
+                    binding.totalPrice.text = (price * binding.rentDays.text.toString().toInt()).toString()
+                } else {
+                    binding.totalPrice.text = "0"
                 }
             }
 
@@ -107,6 +104,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        // Creation of the not available spinner.
         ArrayAdapter.createFromResource(
             this,
             R.array.no_fuel_array,
@@ -116,14 +114,18 @@ class MainActivity : AppCompatActivity() {
             binding.noFuelSpinner.adapter = adapter
         }
 
+
         binding.rentDays.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
             }
-
+            // When it detects a change it calculates the price.
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                // Detect when it is not empty so that it does not break the execution
                 if (binding.rentDays.text.isNotEmpty()) {
                     binding.totalPrice.text = (price * Integer.parseInt(binding.rentDays.text.toString())).toString()
+                } else {
+                    binding.totalPrice.text = "0"
                 }
             }
 
@@ -133,15 +135,26 @@ class MainActivity : AppCompatActivity() {
 
         })
 
-        binding.btnRent.setOnClickListener {
+        binding.btnNext.setOnClickListener {
+            // It only accepts the data and changes the layout when all the fields are entered.
             if (binding.name.text.isNotEmpty() && binding.surnames.text.isNotEmpty()  && binding.rentDays.text.isNotEmpty()) {
-                val intentOrderSummary = Intent(this, OrderSummary::class.java).apply {
-                    putExtra(Intent.EXTRA_TEXT, "")
+                val person = Person(binding.name.text.toString(), binding.surnames.text.toString(),
+                    binding.vehiclesSpinner.selectedItem.toString(),
+                    binding.fuelSpinner.selectedItem?.toString(), binding.ckxGps.isChecked, binding.rentDays.text.toString(),
+                    binding.totalPrice.text.toString()
+                )
+
+                val bundle = Bundle()
+
+                bundle.putParcelable("Person", person)
+
+                val intent = Intent(this, OrderSummary::class.java).apply {
+                    putExtra(Intent.EXTRA_TEXT, bundle)
                 }
 
-                resultOrderSummary.launch(intentOrderSummary)
+                startActivity(intent)
             } else {
-                Toast.makeText(this, getString(R.string.errorFillFields), Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.error_fill_fields), Toast.LENGTH_LONG).show()
             }
 
         }
@@ -154,6 +167,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
+            // Redirect to gmail.
             R.id.gmail -> {
                 val intent = Intent().apply {
                     action = Intent.ACTION_VIEW
@@ -162,8 +176,9 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
                 true
             }
+            // Shows the version of the application and the author.
             R.id.about -> {
-                Toast.makeText(this, getString(R.string.aboutContent), Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.about_content), Toast.LENGTH_LONG).show()
                 true
             }
             else -> super.onOptionsItemSelected(item)

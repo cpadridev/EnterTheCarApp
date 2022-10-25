@@ -1,9 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- EnterTheCar - Adrián Carmona Peña -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".OrderSummary">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:orientation="vertical">
+
+        <LinearLayout
+            style="@style/linearsCenter">
+            <TextView
+                style="@style/textViews"
+                android:text="@string/name"/>
+
+            <TextView
+                style="@style/textViews"
+                android:id="@+id/name"/>
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/linearsCenter">
+            <TextView
+                style="@style/textViews"
+                android:text="@string/surnames"/>
+
+            <TextView
+                style="@style/textViews"
+                android:id="@+id/surnames"/>
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/linearsCenter">
+            <TextView
+                style="@style/textViews"
+                android:text="@string/vehicle"/>
+
+            <TextView
+                style="@style/textViews"
+                android:id="@+id/vehicle"/>
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/linearsCenter"
+            android:id="@+id/fuelLayout">
+            <TextView
+                style="@style/textViews"
+                android:text="@string/fuel"/>
+
+            <TextView
+                style="@style/textViews"
+                android:id="@+id/fuel"/>
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/linearsCenter">
+            <TextView
+                style="@style/textViews"
+                android:text="@string/gps"/>
+
+            <TextView
+                style="@style/textViews"
+                android:id="@+id/gps"/>
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/linearsCenter">
+            <TextView
+                style="@style/textViews"
+                android:text="@string/rent_days"/>
+
+            <TextView
+                style="@style/textViews"
+                android:id="@+id/rentDays"/>
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/linearsCenter">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="@string/total_price"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/totalPrice"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:textAlignment="textEnd"
+                android:text="0"
+                android:textSize="20dp"
+                tools:ignore="RtlCompat" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:textAlignment="textStart"
+                android:text=" €"
+                android:textSize="20dp"
+                tools:ignore="RtlCompat" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_marginBottom="10dp">
+
+        <LinearLayout
+            style="@style/linearsCenter">
+            <Button
+                style="@style/btnStyle"
+                android:text="@string/back"
+                android:id="@+id/btnBack" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/linearsCenter">
+            <Button
+                style="@style/btnStyle"
+                android:text="@string/next"
+                android:id="@+id/btnNext" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

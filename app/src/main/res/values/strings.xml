@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name" translatable="false">EnterTheCar</string>
     <string name="name">Nombre:</string>
-    <string name="hintName">Nombre</string>
+    <string name="hint_name">Nombre</string>
     <string name="surnames">Apellidos:</string>
-    <string name="hintSurname">Apellidos</string>
+    <string name="hint_surname">Apellidos</string>
     <string name="vehicle">Vehículo:</string>
     <string-array name="vehicles_array">
         <item>Turismo</item>
@@ -19,12 +19,24 @@
     <string-array name="no_fuel_array">
         <item>No disponible</item>
     </string-array>
+    <string-array name="card_type_array">
+        <item>VISA</item>
+        <item>MasterCard</item>
+        <item>Euro 6000</item>
+    </string-array>
     <string name="gps" translatable="false">GPS:</string>
-    <string name="rentDays">Días:</string>
-    <string name="totalPrice">Precio TOTAL:</string>
-    <string name="rent">Alquilar</string>
+    <string name="rent_days">Días:</string>
+    <string name="total_price">Precio TOTAL:</string>
     <string name="gmail">Gmail</string>
     <string name="about">Sobre...</string>
-    <string name="aboutContent">Versión de la aplicación: 0.1\nAutor: Adrian Carmona</string>
-    <string name="errorFillFields">Debes rellenar todo antes de seguir.</string>
+    <string name="about_content">Versión de la aplicación: 0.1\nAutor: Adrian Carmona</string>
+    <string name="error_fill_fields">Debes rellenar todo antes de seguir.</string>
+    <string name="next">Siguiente</string>
+    <string name="back">Atrás</string>
+    <string name="yes">Sí</string>
+    <string name="no">No</string>
+    <string name="card_number">Número Tarjeta:</string>
+    <string name="hint_card_name" translatable="false">0000 0000 0000 0000</string>
+    <string name="date_expiration">Fecha Caducidad:</string>
+    <string name="card_type">Tipo Tarjeta:</string>
 </resources>

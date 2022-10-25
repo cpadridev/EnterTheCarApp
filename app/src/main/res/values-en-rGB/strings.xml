@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="name">Name:</string>
-    <string name="totalPrice">TOTAL Prize:</string>
-    <string name="rent">Rent</string>
-    <string name="hintName">Name</string>
+    <string name="total_price">TOTAL Prize:</string>
+    <string name="hint_name">Name</string>
     <string name="surnames">Surnames:</string>
-    <string name="hintSurname">Surnames</string>
+    <string name="hint_surname">Surnames</string>
     <string name="vehicle">Vehicle:</string>
     <string-array name="vehicles_array">
         <item>Car</item>
@@ -21,9 +20,16 @@
     <string-array name="no_fuel_array">
         <item>Not Available</item>
     </string-array>
-    <string name="rentDays">Days:</string>
+    <string name="rent_days">Days:</string>
     <string name="gmail">Gmail</string>
     <string name="about">About...</string>
-    <string name="aboutContent">Application version: 0.1\nAuthor: Adrian Carmona</string>
-    <string name="errorFillFields">You must fill in everything before continuing.</string>
+    <string name="about_content">Application version: 0.1\nAuthor: Adrian Carmona</string>
+    <string name="error_fill_fields">You must fill in everything before continuing.</string>
+    <string name="next">Next</string>
+    <string name="back">Back</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="card_number">Card Number:</string>
+    <string name="date_expiration">Date Expiration:</string>
+    <string name="card_type">Card Type:</string>
 </resources>

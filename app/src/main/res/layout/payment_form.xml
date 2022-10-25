@@ -1,9 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- EnterTheCar - Adrián Carmona Peña -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".PaymentForm">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:orientation="vertical">
+
+        <!-- Vehicle type -->
+        <LinearLayout
+            style="@style/linearsCenter"
+            android:layout_marginVertical="5dp">
+
+            <TextView
+                style="@style/textViews"
+                android:text="@string/card_type"/>
+
+            <Spinner
+                android:id="@+id/cardType"
+                style="@style/spinners" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/linearsCenter">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/card_number"
+                android:textSize="18dp"/>
+
+            <EditText
+                style="@style/nameData"
+                android:id="@+id/name"
+                android:inputType="text"
+                android:hint="@string/hint_card_name" />
+        </LinearLayout>
+
+        <!-- Rent Days -->
+        <LinearLayout
+            style="@style/linearsCenter">
+            <TextView
+                style="@style/textViews"
+                android:text="@string/date_expiration"/>
+
+            <LinearLayout
+                style="@style/linearsCenter">
+
+                <EditText
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:id="@+id/dateExpiration"
+                    android:gravity="center"
+                    android:hint="00/00" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Rent Button -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_marginBottom="10dp">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/next"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:backgroundTint="@color/white"
+            android:textSize="24dp"
+            android:paddingHorizontal="50dp"
+            android:paddingVertical="15dp"
+            android:id="@+id/btnNext" />
+    </LinearLayout>
 </LinearLayout>

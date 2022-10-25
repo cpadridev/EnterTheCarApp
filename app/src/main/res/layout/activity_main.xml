@@ -29,7 +29,7 @@
                 style="@style/nameData"
                 android:id="@+id/name"
                 android:inputType="text"
-                android:hint="@string/hintName" />
+                android:hint="@string/hint_name" />
         </LinearLayout>
 
         <!-- Surname -->
@@ -44,7 +44,7 @@
                 style="@style/nameData"
                 android:id="@+id/surnames"
                 android:inputType="text"
-                android:hint="@string/hintSurname" />
+                android:hint="@string/hint_surname" />
         </LinearLayout>
 
         <!-- Vehicle type -->
@@ -73,11 +73,11 @@
                 android:text="@string/fuel"/>
 
             <Spinner
-                android:id="@+id/fuel_spinner"
+                android:id="@+id/fuelSpinner"
                 style="@style/spinners" />
 
             <Spinner
-                android:id="@+id/no_fuel_spinner"
+                android:id="@+id/noFuelSpinner"
                 android:visibility="invisible"
                 style="@style/spinners" />
         </LinearLayout>
@@ -94,7 +94,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:id="@+id/ckxGPS"
+                android:id="@+id/ckxGps"
                 android:hint="Sí" />
         </LinearLayout>
 
@@ -104,7 +104,7 @@
 
             <TextView
                 style="@style/textViews"
-                android:text="@string/rentDays"/>
+                android:text="@string/rent_days"/>
 
             <LinearLayout
                 style="@style/linearsCenter">
@@ -128,7 +128,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:gravity="center"
-                android:text="@string/totalPrice"
+                android:text="@string/total_price"
                 android:textSize="20dp" />
 
             <TextView
@@ -166,13 +166,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/rent"
+            android:text="@string/next"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:backgroundTint="@color/white"
             android:textSize="24dp"
             android:paddingHorizontal="50dp"
             android:paddingVertical="15dp"
-            android:id="@+id/btnRent" />
+            android:id="@+id/btnNext" />
     </LinearLayout>
 </LinearLayout>
