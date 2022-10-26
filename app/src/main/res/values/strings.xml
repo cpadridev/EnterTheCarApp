@@ -5,24 +5,33 @@
     <string name="surnames">Apellidos:</string>
     <string name="hint_surname">Apellidos</string>
     <string name="vehicle">Vehículo:</string>
+    <string name="tourism">Turismo</string>
+    <string name="motorbike">Moto 10€ / día</string>
+    <string name="scooter">Patinete 5€ / día</string>
     <string-array name="vehicles_array">
-        <item>Turismo</item>
-        <item>Moto 10€ / día</item>
-        <item>Patinete 5€ / día</item>
+        <item>@string/tourism</item>
+        <item>@string/motorbike</item>
+        <item>@string/scooter</item>
     </string-array>
     <string name="fuel">Combustible:</string>
+    <string name="diesel">Diésel 25€ / día</string>
+    <string name="gasoline">Gasolina 20€ / día</string>
+    <string name="electric">Eléctrico 5€ / día</string>
     <string-array name="fuel_array">
-        <item>Diésel 25€ / día</item>
-        <item>Gasolina 20€ / día</item>
-        <item>Eléctrico 15€ / día</item>
+        <item>@string/diesel</item>
+        <item>@string/gasoline</item>
+        <item>@string/electric</item>
     </string-array>
     <string-array name="no_fuel_array">
         <item>No disponible</item>
     </string-array>
+    <string name="visa" translatable="false">VISA</string>
+    <string name="mastercard" translatable="false">MasterCard</string>
+    <string name="euro_6000" translatable="false">Euro 6000</string>
     <string-array name="card_type_array">
-        <item>VISA</item>
-        <item>MasterCard</item>
-        <item>Euro 6000</item>
+        <item>@string/visa</item>
+        <item>@string/mastercard</item>
+        <item>@string/euro_6000</item>
     </string-array>
     <string name="gps" translatable="false">GPS:</string>
     <string name="rent_days">Días:</string>

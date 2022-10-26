@@ -6,16 +6,22 @@
     <string name="surnames">Surnames:</string>
     <string name="hint_surname">Surnames</string>
     <string name="vehicle">Vehicle:</string>
+    <string name="tourism">Tourism</string>
+    <string name="motorbike">Motorbike 10€ / day</string>
+    <string name="scooter">Scooter 5€ / day</string>
     <string-array name="vehicles_array">
-        <item>Car</item>
-        <item>Motorbike 10€ / day</item>
-        <item>Scooter 5€ / day</item>
+        <item>@string/tourism</item>
+        <item>@string/motorbike</item>
+        <item>@string/scooter</item>
     </string-array>
     <string name="fuel">Fuel:</string>
+    <string name="diesel">Diesel 25€ / day</string>
+    <string name="gasoline">Gasoline 20€ / day</string>
+    <string name="electric">Electric 15€ / day</string>
     <string-array name="fuel_array">
-        <item>Diesel 25€ / día</item>
-        <item>Gasoline 20€ / día</item>
-        <item>Electric 15€ / día</item>
+        <item>@string/diesel</item>
+        <item>@string/gasoline</item>
+        <item>@string/electric</item>
     </string-array>
     <string-array name="no_fuel_array">
         <item>Not Available</item>

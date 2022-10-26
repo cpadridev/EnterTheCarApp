@@ -114,6 +114,26 @@ class MainActivity : AppCompatActivity() {
             binding.noFuelSpinner.adapter = adapter
         }
 
+        if (intent.hasExtra(Intent.EXTRA_TEXT)) {
+            val bundle = intent.getBundleExtra(Intent.EXTRA_TEXT)
+
+            val person: Person? = bundle?.getParcelable("Person")
+
+            binding.name.setText(person?.name)
+            binding.surnames.setText(person?.surnames)
+            binding.vehiclesSpinner.setSelection(
+                when(person?.vehicleType) {
+                    getString(R.string.tourism) -> 0
+                    getString(R.string.motorbike) -> 1
+                    getString(R.string.scooter) -> 2
+                    else -> 0
+                }
+            )
+            binding.fuelSpinner.selectedItem?.toString()
+            binding.ckxGps.isChecked = person?.gps!!
+            binding.rentDays.setText(person?.days)
+            binding.totalPrice.text = person?.totalPrice
+        }
 
         binding.rentDays.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -138,9 +158,13 @@ class MainActivity : AppCompatActivity() {
         binding.btnNext.setOnClickListener {
             // It only accepts the data and changes the layout when all the fields are entered.
             if (binding.name.text.isNotEmpty() && binding.surnames.text.isNotEmpty()  && binding.rentDays.text.isNotEmpty()) {
-                val person = Person(binding.name.text.toString(), binding.surnames.text.toString(),
+                val person = Person(
+                    binding.name.text.toString(),
+                    binding.surnames.text.toString(),
                     binding.vehiclesSpinner.selectedItem.toString(),
-                    binding.fuelSpinner.selectedItem?.toString(), binding.ckxGps.isChecked, binding.rentDays.text.toString(),
+                    binding.fuelSpinner.selectedItem?.toString(),
+                    binding.ckxGps.isChecked,
+                    binding.rentDays.text.toString(),
                     binding.totalPrice.text.toString()
                 )
 

@@ -42,7 +42,7 @@
             <EditText
                 style="@style/nameData"
                 android:id="@+id/name"
-                android:inputType="text"
+                android:inputType="number"
                 android:hint="@string/hint_card_name" />
         </LinearLayout>
 
@@ -60,7 +60,9 @@
                     android:layout_width="80dp"
                     android:layout_height="60dp"
                     android:id="@+id/dateExpiration"
+                    android:inputType="number"
                     android:gravity="center"
+                    android:maxLength="5"
                     android:hint="00/00" />
             </LinearLayout>
         </LinearLayout>
