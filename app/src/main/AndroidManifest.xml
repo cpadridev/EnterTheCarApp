@@ -12,7 +12,7 @@
         android:label="@string/app_name"
         android:logo="@drawable/todo_terreno"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Material3.Dark"
+        android:theme="@style/Theme.CarmonaAdrian_EnterTheCar"
         tools:targetApi="31" >
         <activity
             android:name=".MainActivity"

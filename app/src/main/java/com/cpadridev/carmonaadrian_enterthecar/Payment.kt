@@ -6,7 +6,7 @@ import android.os.Parcelable
 /**
 @author: Adrian Carmona
  */
-data class Payment(val cardType: String, val cardNumber: Int, val expirationDate: String) : Parcelable {
+data class Payment(val cardType: String, val cardNumber: String, val expirationDate: String) : Parcelable {
     companion object CREATOR: Parcelable.Creator<Payment> {
         override fun createFromParcel(`in`: Parcel): Payment {
             return Payment(`in`)
@@ -17,7 +17,7 @@ data class Payment(val cardType: String, val cardNumber: Int, val expirationDate
         }
     }
 
-    constructor(`in`: Parcel) : this(`in`.readString()!!, `in`.readInt(), `in`.readString()!!)
+    constructor(`in`: Parcel) : this(`in`.readString()!!, `in`.readString()!!, `in`.readString()!!)
 
     override fun describeContents(): Int {
         return 0
@@ -25,7 +25,7 @@ data class Payment(val cardType: String, val cardNumber: Int, val expirationDate
 
     override fun writeToParcel(out: Parcel, flag: Int) {
         out.writeString(cardType)
-        out.writeString(cardNumber.toString())
+        out.writeString(cardNumber)
         out.writeString(expirationDate)
     }
 }

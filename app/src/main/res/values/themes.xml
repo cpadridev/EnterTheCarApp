@@ -22,6 +22,7 @@
 
     <style name="nameData">
         <item name="android:layout_width">match_parent</item>
+        <item name="marginHorizontal">20dp</item>
         <item name="android:layout_height">60dp</item>
         <item name="android:layout_weight">1</item>
     </style>

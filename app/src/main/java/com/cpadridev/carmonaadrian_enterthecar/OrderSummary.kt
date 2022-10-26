@@ -1,7 +1,10 @@
 package com.cpadridev.carmonaadrian_enterthecar
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -43,12 +46,12 @@ class OrderSummary : AppCompatActivity() {
 
         }
 
-        binding.btnBack.setOnClickListener {
+        binding.btnCancel.setOnClickListener {
             val person = Person(
                 binding.name.text.toString(),
                 binding.surnames.text.toString(),
-                binding.vehicle.toString(),
-                binding.fuel.toString(),
+                binding.vehicle.text.toString(),
+                binding.fuel.text.toString(),
                 binding.gps.text.toString() == getString(R.string.yes),
                 binding.rentDays.text.toString(),
                 binding.totalPrice.text.toString()
@@ -65,7 +68,7 @@ class OrderSummary : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.btnNext.setOnClickListener {
+        binding.btnSend.setOnClickListener {
             val person = Person(
                 binding.name.text.toString(),
                 binding.surnames.text.toString(),
@@ -85,6 +88,31 @@ class OrderSummary : AppCompatActivity() {
             }
 
             startActivity(intent)
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            // Redirect to gmail.
+            R.id.gmail -> {
+                val intent = Intent().apply {
+                    action = Intent.ACTION_VIEW
+                    data = Uri.parse("https://www.gmail.com")
+                }
+                startActivity(intent)
+                true
+            }
+            // Shows the version of the application and the author.
+            R.id.about -> {
+                Toast.makeText(this, getString(R.string.about_content), Toast.LENGTH_LONG).show()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }

@@ -31,11 +31,17 @@
     <string name="about">About...</string>
     <string name="about_content">Application version: 0.1\nAuthor: Adrian Carmona</string>
     <string name="error_fill_fields">You must fill in everything before continuing.</string>
-    <string name="next">Next</string>
-    <string name="back">Back</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="card_number">Card Number:</string>
-    <string name="date_expiration">Date Expiration:</string>
+    <string name="expiration_date">Date Expiration:</string>
     <string name="card_type">Card Type:</string>
+    <string name="error_valid_date">The date is not valid</string>
+    <string name="send">Send</string>
+    <string name="cancel">Cancel</string>
+    <string name="accept">Accept</string>
+    <string name="payment">Payment</string>
+    <string name="order">Order</string>
+    <string name="proof_payment_title">Proof of payment of</string>
+    <string name="payment_made">Payment made</string>
 </resources>

@@ -40,10 +40,10 @@
                 android:textSize="18dp"/>
 
             <EditText
+                android:id="@+id/cardNumber"
                 style="@style/nameData"
-                android:id="@+id/name"
-                android:inputType="number"
-                android:hint="@string/hint_card_name" />
+                android:hint="@string/hint_card_name"
+                android:inputType="number" />
         </LinearLayout>
 
         <!-- Rent Days -->
@@ -51,7 +51,7 @@
             style="@style/linearsCenter">
             <TextView
                 style="@style/textViews"
-                android:text="@string/date_expiration"/>
+                android:text="@string/expiration_date"/>
 
             <LinearLayout
                 style="@style/linearsCenter">
@@ -59,7 +59,7 @@
                 <EditText
                     android:layout_width="80dp"
                     android:layout_height="60dp"
-                    android:id="@+id/dateExpiration"
+                    android:id="@+id/expirationDate"
                     android:inputType="number"
                     android:gravity="center"
                     android:maxLength="5"
@@ -80,13 +80,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/next"
+            android:text="@string/send"
             android:textStyle="bold"
             android:textColor="@color/black"
             android:backgroundTint="@color/white"
             android:textSize="24dp"
             android:paddingHorizontal="50dp"
             android:paddingVertical="15dp"
-            android:id="@+id/btnNext" />
+            android:id="@+id/btnSend" />
     </LinearLayout>
 </LinearLayout>

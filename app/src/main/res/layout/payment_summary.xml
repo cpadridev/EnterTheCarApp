@@ -39,11 +39,11 @@
             style="@style/linearsCenter">
             <TextView
                 style="@style/textViews"
-                android:text="@string/date_expiration"/>
+                android:text="@string/expiration_date"/>
 
             <TextView
                 style="@style/textViews"
-                android:id="@+id/dateExpiration"/>
+                android:id="@+id/expirationDate"/>
         </LinearLayout>
 
     </LinearLayout>
@@ -59,16 +59,17 @@
             style="@style/linearsCenter">
             <Button
                 style="@style/btnStyle"
-                android:text="@string/back"
-                android:id="@+id/btnBack" />
+                android:text="@string/accept"
+                android:id="@+id/btnAccept" />
         </LinearLayout>
 
         <LinearLayout
             style="@style/linearsCenter">
-            <Button
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
                 style="@style/btnStyle"
-                android:text="@string/next"
-                android:id="@+id/btnNext" />
+                android:text="@string/send"
+                android:src="@drawable/email_arrow_right"
+                android:id="@+id/fabSend" />
         </LinearLayout>
 
     </LinearLayout>

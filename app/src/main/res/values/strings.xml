@@ -40,12 +40,18 @@
     <string name="about">Sobre...</string>
     <string name="about_content">Versión de la aplicación: 0.1\nAutor: Adrian Carmona</string>
     <string name="error_fill_fields">Debes rellenar todo antes de seguir.</string>
-    <string name="next">Siguiente</string>
-    <string name="back">Atrás</string>
+    <string name="send">Enviar</string>
+    <string name="cancel">Cancelar</string>
     <string name="yes">Sí</string>
     <string name="no">No</string>
     <string name="card_number">Número Tarjeta:</string>
     <string name="hint_card_name" translatable="false">0000 0000 0000 0000</string>
-    <string name="date_expiration">Fecha Caducidad:</string>
+    <string name="expiration_date">Fecha Caducidad:</string>
     <string name="card_type">Tipo Tarjeta:</string>
+    <string name="error_valid_date">La fecha no es válida</string>
+    <string name="accept">Aceptar</string>
+    <string name="payment">Pago</string>
+    <string name="order">Pedido</string>
+    <string name="proof_payment_title">Justificante de pago de</string>
+    <string name="payment_made">Pago realizado</string>
 </resources>

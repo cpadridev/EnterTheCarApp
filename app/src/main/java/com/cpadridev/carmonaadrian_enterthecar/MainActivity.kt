@@ -122,14 +122,19 @@ class MainActivity : AppCompatActivity() {
             binding.name.setText(person?.name)
             binding.surnames.setText(person?.surnames)
             binding.vehiclesSpinner.setSelection(
-                when(person?.vehicleType) {
-                    getString(R.string.tourism) -> 0
+                when(person?.vehicleType.toString()) {
                     getString(R.string.motorbike) -> 1
                     getString(R.string.scooter) -> 2
                     else -> 0
                 }
             )
-            binding.fuelSpinner.selectedItem?.toString()
+            binding.fuelSpinner.setSelection(
+                when(person?.fuelType) {
+                    getString(R.string.gasoline) -> 1
+                    getString(R.string.electric) -> 2
+                    else -> 0
+                }
+            )
             binding.ckxGps.isChecked = person?.gps!!
             binding.rentDays.setText(person?.days)
             binding.totalPrice.text = person?.totalPrice
@@ -155,7 +160,7 @@ class MainActivity : AppCompatActivity() {
 
         })
 
-        binding.btnNext.setOnClickListener {
+        binding.btnSend.setOnClickListener {
             // It only accepts the data and changes the layout when all the fields are entered.
             if (binding.name.text.isNotEmpty() && binding.surnames.text.isNotEmpty()  && binding.rentDays.text.isNotEmpty()) {
                 val person = Person(
