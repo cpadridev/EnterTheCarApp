@@ -1,5 +1,6 @@
 package com.cpadridev.carmonaadrian_enterthecar
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -7,9 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.cpadridev.carmonaadrian_enterthecar.databinding.PaymentFormBinding
 import com.cpadridev.carmonaadrian_enterthecar.databinding.PaymentSummaryBinding
-import com.google.android.material.snackbar.Snackbar
 
 /**
 @author: Adrian Carmona
@@ -47,12 +46,13 @@ class PaymentSummary: AppCompatActivity() {
         }
 
         binding.fabSend.setOnClickListener {
+            val to = arrayOf("youremail@example.com")
             val intent = Intent().apply{
                 action = Intent.ACTION_SEND
                 data = Uri.parse("mailto:")
                 type = "text/plain"
                 putExtra(Intent.EXTRA_SUBJECT, "${getString(R.string.proof_payment_title)} ${person?.name} ${person?.surnames}")
-                putExtra(Intent.EXTRA_EMAIL, "vicmas@alu.iesmatisse.es")
+                putExtra(Intent.EXTRA_EMAIL, to)
                 putExtra(Intent.EXTRA_TEXT,
 
                     "\n ${getString(R.string.order)} ->" +
