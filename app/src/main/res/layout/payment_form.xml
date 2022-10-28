@@ -39,11 +39,13 @@
                 android:text="@string/card_number"
                 android:textSize="18dp"/>
 
-            <EditText
+            <com.santalu.maskara.widget.MaskEditText
                 android:id="@+id/cardNumber"
                 style="@style/nameData"
                 android:hint="@string/hint_card_name"
-                android:inputType="number" />
+                android:inputType="number"
+                app:mask="#### #### #### ####"
+                android:maxLength="19"/>
         </LinearLayout>
 
         <!-- Rent Days -->
@@ -56,13 +58,14 @@
             <LinearLayout
                 style="@style/linearsCenter">
 
-                <EditText
+                <com.santalu.maskara.widget.MaskEditText
                     android:layout_width="80dp"
                     android:layout_height="60dp"
                     android:id="@+id/expirationDate"
                     android:inputType="number"
                     android:gravity="center"
                     android:maxLength="5"
+                    app:mask="##/##"
                     android:hint="00/00" />
             </LinearLayout>
         </LinearLayout>

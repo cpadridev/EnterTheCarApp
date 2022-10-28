@@ -1,9 +1,11 @@
 package com.cpadridev.carmonaadrian_enterthecar
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.Menu
@@ -21,12 +23,12 @@ import com.cpadridev.carmonaadrian_enterthecar.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
+    private var person: Person? = null
     private var price: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
 
         // Creation of the vehicle spinner.
@@ -37,6 +39,26 @@ class MainActivity : AppCompatActivity() {
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             binding.vehiclesSpinner.adapter = adapter
+        }
+
+        // Creation of the fuel spinner.
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.fuel_array,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.fuelSpinner.adapter = adapter
+        }
+
+        // Creation of the not available spinner.
+        ArrayAdapter.createFromResource(
+            this,
+            R.array.no_fuel_array,
+            android.R.layout.simple_spinner_item
+        ).also { adapter ->
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.noFuelSpinner.adapter = adapter
         }
 
         binding.vehiclesSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -70,16 +92,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Creation of the fuel spinner.
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.fuel_array,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            binding.fuelSpinner.adapter = adapter
-        }
-
         binding.fuelSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
                 val item = binding.fuelSpinner.getItemAtPosition(pos).toString()
@@ -104,20 +116,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Creation of the not available spinner.
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.no_fuel_array,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            binding.noFuelSpinner.adapter = adapter
-        }
-
         if (intent.hasExtra(Intent.EXTRA_TEXT)) {
             val bundle = intent.getBundleExtra(Intent.EXTRA_TEXT)
 
-            val person: Person? = bundle?.getParcelable("Person")
+            person = bundle?.getParcelable("Person")
 
             binding.name.setText(person?.name)
             binding.surnames.setText(person?.surnames)
@@ -128,16 +130,27 @@ class MainActivity : AppCompatActivity() {
                     else -> 0
                 }
             )
-            binding.fuelSpinner.setSelection(
+            binding.fuelSpinner?.setSelection(
                 when(person?.fuelType) {
                     getString(R.string.gasoline) -> 1
                     getString(R.string.electric) -> 2
                     else -> 0
                 }
             )
+            if (person?.vehicleType != getString(R.string.tourism)) {
+                binding.noFuelSpinner.isEnabled = false
+                binding.fuelSpinner.isVisible = false
+                binding.noFuelSpinner.isVisible = true
+                when(person?.vehicleType.toString()) {
+                    getString(R.string.motorbike) -> price = 10
+                    else -> price = 5
+                }
+            }
             binding.ckxGps.isChecked = person?.gps!!
             binding.rentDays.setText(person?.days)
-            binding.totalPrice.text = person?.totalPrice
+            if (binding.rentDays.text.isNotEmpty()) {
+                binding.totalPrice.text = (price * binding.rentDays.text.toString().toInt()).toString()
+            }
         }
 
         binding.rentDays.addTextChangedListener(object: TextWatcher {
@@ -163,7 +176,7 @@ class MainActivity : AppCompatActivity() {
         binding.btnSend.setOnClickListener {
             // It only accepts the data and changes the layout when all the fields are entered.
             if (binding.name.text.isNotEmpty() && binding.surnames.text.isNotEmpty()  && binding.rentDays.text.isNotEmpty()) {
-                val person = Person(
+                person = Person(
                     binding.name.text.toString(),
                     binding.surnames.text.toString(),
                     binding.vehiclesSpinner.selectedItem.toString(),
@@ -185,8 +198,8 @@ class MainActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, getString(R.string.error_fill_fields), Toast.LENGTH_LONG).show()
             }
-
         }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

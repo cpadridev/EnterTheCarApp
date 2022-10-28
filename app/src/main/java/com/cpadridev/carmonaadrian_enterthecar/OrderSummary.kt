@@ -3,13 +3,14 @@ package com.cpadridev.carmonaadrian_enterthecar
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import com.cpadridev.carmonaadrian_enterthecar.databinding.ActivityMainBinding
 import com.cpadridev.carmonaadrian_enterthecar.databinding.OrderSummaryBinding
+
 
 /**
 @author: Adrian Carmona
@@ -17,6 +18,7 @@ import com.cpadridev.carmonaadrian_enterthecar.databinding.OrderSummaryBinding
 class OrderSummary : AppCompatActivity() {
     private lateinit var binding: OrderSummaryBinding
 
+    private var person: Person? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -26,7 +28,7 @@ class OrderSummary : AppCompatActivity() {
         if (intent.hasExtra(Intent.EXTRA_TEXT)) {
             val bundle = intent.getBundleExtra(Intent.EXTRA_TEXT)
 
-            val person: Person? = bundle?.getParcelable("Person")
+            person = bundle?.getParcelable("Person")
 
             binding.name.text = person?.name
             binding.surnames.text = person?.surnames
@@ -43,20 +45,9 @@ class OrderSummary : AppCompatActivity() {
                 }
             binding.rentDays.text = person?.days
             binding.totalPrice.text = person?.totalPrice
-
         }
 
         binding.btnCancel.setOnClickListener {
-            val person = Person(
-                binding.name.text.toString(),
-                binding.surnames.text.toString(),
-                binding.vehicle.text.toString(),
-                binding.fuel.text.toString(),
-                binding.gps.text.toString() == getString(R.string.yes),
-                binding.rentDays.text.toString(),
-                binding.totalPrice.text.toString()
-            )
-
             val bundle = Bundle()
 
             bundle?.putParcelable("Person", person)
@@ -68,17 +59,7 @@ class OrderSummary : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.btnSend.setOnClickListener {
-            val person = Person(
-                binding.name.text.toString(),
-                binding.surnames.text.toString(),
-                binding.vehicle.toString(),
-                binding.fuel.toString(),
-                binding.gps.text.toString() == getString(R.string.yes),
-                binding.rentDays.text.toString(),
-                binding.totalPrice.text.toString()
-            )
-
+        binding.btnPay.setOnClickListener {
             val bundle = Bundle()
 
             bundle?.putParcelable("Person", person)

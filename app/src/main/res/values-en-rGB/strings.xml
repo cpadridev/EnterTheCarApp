@@ -27,12 +27,10 @@
         <item>Not Available</item>
     </string-array>
     <string name="rent_days">Days:</string>
-    <string name="gmail">Gmail</string>
     <string name="about">About...</string>
-    <string name="about_content">Application version: 0.1\nAuthor: Adrian Carmona</string>
+    <string name="about_content">Application version: 1.0 Author: Adrian Carmona</string>
     <string name="error_fill_fields">You must fill in everything before continuing.</string>
     <string name="yes">Yes</string>
-    <string name="no">No</string>
     <string name="card_number">Card Number:</string>
     <string name="expiration_date">Date Expiration:</string>
     <string name="card_type">Card Type:</string>
@@ -44,4 +42,6 @@
     <string name="order">Order</string>
     <string name="proof_payment_title">Proof of payment of</string>
     <string name="payment_made">Payment made</string>
+    <string name="pay">Pay</string>
+    <string name="error_valid_card">The card is not valid</string>
 </resources>

@@ -56,8 +56,14 @@ class PaymentSummary: AppCompatActivity() {
                 putExtra(Intent.EXTRA_TEXT,
 
                     "\n ${getString(R.string.order)} ->" +
-                            "\n\t${getString(R.string.vehicle)}: ${person?.vehicleType}" +
-                            "\n\t${getString(R.string.fuel)}: ${person?.fuelType}" +
+                            "\n\t${getString(R.string.vehicle)}: ${person?.vehicleType.toString()}" +
+                            "${
+                                if (person?.vehicleType.toString() == getString(R.string.tourism)) {
+                                    "\n\t${getString(R.string.fuel)}: ${person?.fuelType.toString()}"
+                                } else {
+                                    "".trim()
+                                }
+                            }" +
                             "\n\t${getString(R.string.gps)}: ${
                                 if (person?.gps == true) {
                                     getString(R.string.yes)

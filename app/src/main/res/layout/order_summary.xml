@@ -134,8 +134,8 @@
             style="@style/linearsCenter">
             <Button
                 style="@style/btnStyle"
-                android:text="@string/send"
-                android:id="@+id/btnSend" />
+                android:text="@string/pay"
+                android:id="@+id/btnPay" />
         </LinearLayout>
 
     </LinearLayout>

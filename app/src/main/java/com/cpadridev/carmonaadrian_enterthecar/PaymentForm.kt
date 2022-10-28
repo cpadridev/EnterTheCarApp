@@ -16,11 +16,11 @@ import com.cpadridev.carmonaadrian_enterthecar.databinding.PaymentFormBinding
 /**
 @author: Adrian Carmona
  */
-class PaymentForm: AppCompatActivity() {
+class PaymentForm : AppCompatActivity() {
     private lateinit var binding: PaymentFormBinding
     private lateinit var person: Person
+    private lateinit var payment: Payment
 
-    private var validDate: Boolean = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -43,65 +43,38 @@ class PaymentForm: AppCompatActivity() {
             binding.cardType.adapter = adapter
         }
 
-        binding.expirationDate.addTextChangedListener(object: TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                var date = binding.expirationDate.text
-
-                binding.expirationDate.setOnKeyListener { _, keyCode, _ ->
-                    if (keyCode == KeyEvent.KEYCODE_DEL && date.length == 3 && date.contains("/")) {
-                        binding.expirationDate.setSelection(2)
-                    }
-                    false
-                }
-
-                if (date.length == 2 && !date.contains("/")) {
-//                    if (date.substring(0, 2).toInt() < 12){
-//                        validDate = false
-//                    }
-                    binding.expirationDate.setText("$date/")
-                }
-                if (date.length == 3 && date.contains("/")) {
-                    binding.expirationDate.setSelection(3)
-                }
-//                if (date.length == 5 && date.substring(3, 5).toInt() > 0 && date.substring(3, 5).toInt() < 50) {
-//                    validDate = false
-//                }
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-
-            }
-
-        })
-
         binding.btnSend.setOnClickListener {
-            if (validDate) {
-                if (binding.cardNumber.text.isNotEmpty() && binding.expirationDate.text.isNotEmpty()) {
-                    val payment = Payment(
-                        binding.cardType.selectedItem.toString(),
-                        binding.cardNumber.text.toString(),
-                        binding.expirationDate.text.toString()
-                    )
+            var date = binding.expirationDate.text
 
-                    val bundle = Bundle()
+            if (binding.cardNumber.text?.isNotEmpty() == true && binding.expirationDate.text?.isNotEmpty() == true) {
+                if (binding.cardNumber.text!!.length == 19) {
+                    if (date != null) {
+                        if (date.length == 5 && date.substring(0, 2).toInt() in 1..13 && date.substring(3, 5).toInt() in 1..100) {
+                            payment = Payment(
+                                binding.cardType.selectedItem.toString(),
+                                binding.cardNumber.text.toString(),
+                                binding.expirationDate.text.toString()
+                            )
 
-                    bundle.putParcelable("Person", person)
-                    bundle.putParcelable("Payment", payment)
+                            val bundle = Bundle()
 
-                    val intent = Intent(this, PaymentSummary::class.java).apply {
-                        putExtra(Intent.EXTRA_TEXT, bundle)
+                            bundle.putParcelable("Person", person)
+                            bundle.putParcelable("Payment", payment)
+
+                            val intent = Intent(this, PaymentSummary::class.java).apply {
+                                putExtra(Intent.EXTRA_TEXT, bundle)
+                            }
+
+                            startActivity(intent)
+                        } else {
+                            Toast.makeText(this, getString(R.string.error_valid_date), Toast.LENGTH_LONG).show()
+                        }
                     }
-
-                    startActivity(intent)
                 } else {
-                    Toast.makeText(this, getString(R.string.error_fill_fields), Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, getString(R.string.error_valid_card), Toast.LENGTH_LONG).show()
                 }
             } else {
-                Toast.makeText(this, getString(R.string.error_valid_date), Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.error_fill_fields), Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -112,7 +85,7 @@ class PaymentForm: AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
+        return when (item.itemId) {
             // Redirect to gmail.
             R.id.gmail -> {
                 val intent = Intent().apply {
