@@ -1,11 +1,9 @@
 package com.cpadridev.carmonaadrian_enterthecar
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.Menu
@@ -18,7 +16,7 @@ import androidx.core.view.isVisible
 import com.cpadridev.carmonaadrian_enterthecar.databinding.ActivityMainBinding
 
 /**
-    @author: Adrian Carmona
+@author: Adrian Carmona
  */
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -61,51 +59,58 @@ class MainActivity : AppCompatActivity() {
             binding.noFuelSpinner.adapter = adapter
         }
 
-        binding.vehiclesSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, pos: Int, id: Long) {
-                // Item selected
-                val item = binding.vehiclesSpinner.getItemAtPosition(pos).toString()
-                // Get an array from string resources
-                val vehiclesArray = resources.getStringArray(R.array.vehicles_array)
+        binding.vehiclesSpinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View?,
+                    pos: Int,
+                    id: Long
+                ) {
+                    // Item selected
+                    val item = binding.vehiclesSpinner.getItemAtPosition(pos).toString()
+                    // Get an array from string resources
+                    val vehiclesArray = resources.getStringArray(R.array.vehicles_array)
 
-                // Disable no fuel
-                binding.noFuelSpinner.isEnabled = false
-                binding.fuelSpinner.isVisible = item == vehiclesArray[0]
-                binding.noFuelSpinner.isVisible = item != vehiclesArray[0]
+                    // Disable no fuel
+                    binding.noFuelSpinner.isEnabled = false
+                    binding.fuelSpinner.isVisible = item == vehiclesArray[0]
+                    binding.noFuelSpinner.isVisible = item != vehiclesArray[0]
 
-                // Change the price depending on the selected vehicle
-                when(item) {
-                    vehiclesArray[1] -> price = 10
-                    vehiclesArray[2] -> price = 5
+                    // Change the price depending on the selected vehicle
+                    when (item) {
+                        vehiclesArray[1] -> price = 10
+                        vehiclesArray[2] -> price = 5
+                    }
+
+                    // Calculate the price
+                    if (binding.rentDays.text.isNotEmpty()) {
+                        binding.totalPrice.text =
+                            (price * binding.rentDays.text.toString().toInt()).toString()
+                    } else {
+                        binding.totalPrice.text = "0"
+                    }
                 }
 
-                // Calculate the price
-                if (binding.rentDays.text.isNotEmpty()) {
-                    binding.totalPrice.text = (price * binding.rentDays.text.toString().toInt()).toString()
-                } else {
-                    binding.totalPrice.text = "0"
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+
                 }
             }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-
-            }
-        }
 
         binding.fuelSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, pos: Int, id: Long) {
                 val item = binding.fuelSpinner.getItemAtPosition(pos).toString()
                 val fuelsArray = resources.getStringArray(R.array.fuel_array)
 
-                when(item) {
+                when (item) {
                     fuelsArray[0] -> price = 25
                     fuelsArray[1] -> price = 20
                     fuelsArray[2] -> price = 15
                 }
 
-                if (binding.rentDays.text.isNotEmpty())
-                {
-                    binding.totalPrice.text = (price * binding.rentDays.text.toString().toInt()).toString()
+                if (binding.rentDays.text.isNotEmpty()) {
+                    binding.totalPrice.text =
+                        (price * binding.rentDays.text.toString().toInt()).toString()
                 } else {
                     binding.totalPrice.text = "0"
                 }
@@ -116,6 +121,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        // Detect data entry
         if (intent.hasExtra(Intent.EXTRA_TEXT)) {
             val bundle = intent.getBundleExtra(Intent.EXTRA_TEXT)
 
@@ -124,24 +130,25 @@ class MainActivity : AppCompatActivity() {
             binding.name.setText(person?.name)
             binding.surnames.setText(person?.surnames)
             binding.vehiclesSpinner.setSelection(
-                when(person?.vehicleType.toString()) {
+                when (person?.vehicleType.toString()) {
                     getString(R.string.motorbike) -> 1
                     getString(R.string.scooter) -> 2
                     else -> 0
                 }
             )
             binding.fuelSpinner?.setSelection(
-                when(person?.fuelType) {
+                when (person?.fuelType) {
                     getString(R.string.gasoline) -> 1
                     getString(R.string.electric) -> 2
                     else -> 0
                 }
             )
+            // Recalculates price
             if (person?.vehicleType != getString(R.string.tourism)) {
                 binding.noFuelSpinner.isEnabled = false
                 binding.fuelSpinner.isVisible = false
                 binding.noFuelSpinner.isVisible = true
-                when(person?.vehicleType.toString()) {
+                when (person?.vehicleType.toString()) {
                     getString(R.string.motorbike) -> price = 10
                     else -> price = 5
                 }
@@ -149,19 +156,22 @@ class MainActivity : AppCompatActivity() {
             binding.ckxGps.isChecked = person?.gps!!
             binding.rentDays.setText(person?.days)
             if (binding.rentDays.text.isNotEmpty()) {
-                binding.totalPrice.text = (price * binding.rentDays.text.toString().toInt()).toString()
+                binding.totalPrice.text =
+                    (price * binding.rentDays.text.toString().toInt()).toString()
             }
         }
 
-        binding.rentDays.addTextChangedListener(object: TextWatcher {
+        binding.rentDays.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
             }
+
             // When it detects a change it calculates the price.
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 // Detect when it is not empty so that it does not break the execution
                 if (binding.rentDays.text.isNotEmpty()) {
-                    binding.totalPrice.text = (price * Integer.parseInt(binding.rentDays.text.toString())).toString()
+                    binding.totalPrice.text =
+                        (price * Integer.parseInt(binding.rentDays.text.toString())).toString()
                 } else {
                     binding.totalPrice.text = "0"
                 }
@@ -175,7 +185,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnSend.setOnClickListener {
             // It only accepts the data and changes the layout when all the fields are entered.
-            if (binding.name.text.isNotEmpty() && binding.surnames.text.isNotEmpty()  && binding.rentDays.text.isNotEmpty()) {
+            if (binding.name.text.isNotEmpty() && binding.surnames.text.isNotEmpty() && binding.rentDays.text.isNotEmpty()) {
                 person = Person(
                     binding.name.text.toString(),
                     binding.surnames.text.toString(),
@@ -196,7 +206,8 @@ class MainActivity : AppCompatActivity() {
 
                 startActivity(intent)
             } else {
-                Toast.makeText(this, getString(R.string.error_fill_fields), Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.error_fill_fields), Toast.LENGTH_LONG)
+                    .show()
             }
         }
 
@@ -208,7 +219,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
+        return when (item.itemId) {
             // Redirect to gmail.
             R.id.gmail -> {
                 val intent = Intent().apply {
@@ -225,5 +236,11 @@ class MainActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        // In the main interface, it exits the application if you hit the back button.
+        finishAffinity()
     }
 }

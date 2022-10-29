@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EnterTheCar - Adrián Carmona Peña -->
+<?xml version="1.0" encoding="utf-8"?><!-- EnterTheCar - Adrián Carmona Peña -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -14,8 +13,7 @@
         android:orientation="vertical">
 
         <!-- Name -->
-        <LinearLayout
-            style="@style/linearsCenter">
+        <LinearLayout style="@style/linearsCenter">
 
             <TextView
                 android:layout_width="match_parent"
@@ -23,28 +21,27 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/name"
-                android:textSize="18dp"/>
+                android:textSize="18dp" />
 
             <EditText
-                style="@style/nameData"
                 android:id="@+id/name"
-                android:inputType="text"
-                android:hint="@string/hint_name" />
+                style="@style/nameData"
+                android:hint="@string/hint_name"
+                android:inputType="text" />
         </LinearLayout>
 
         <!-- Surname -->
-        <LinearLayout
-            style="@style/linearsCenter">
+        <LinearLayout style="@style/linearsCenter">
 
             <TextView
                 style="@style/textViews"
-                android:text="@string/surnames"/>
+                android:text="@string/surnames" />
 
             <EditText
-                style="@style/nameData"
                 android:id="@+id/surnames"
-                android:inputType="text"
-                android:hint="@string/hint_surname" />
+                style="@style/nameData"
+                android:hint="@string/hint_surname"
+                android:inputType="text" />
         </LinearLayout>
 
         <!-- Vehicle type -->
@@ -54,7 +51,7 @@
 
             <TextView
                 style="@style/textViews"
-                android:text="@string/vehicle"/>
+                android:text="@string/vehicle" />
 
             <Spinner
                 android:id="@+id/vehicles_spinner"
@@ -63,14 +60,14 @@
 
         <!-- Fuel type -->
         <LinearLayout
+            android:id="@+id/fuelLayout"
             style="@style/linearsCenter"
             android:layout_marginTop="5dp"
-            android:id="@+id/fuelLayout"
             android:visibility="visible">
 
             <TextView
                 style="@style/textViews"
-                android:text="@string/fuel"/>
+                android:text="@string/fuel" />
 
             <Spinner
                 android:id="@+id/fuelSpinner"
@@ -78,50 +75,46 @@
 
             <Spinner
                 android:id="@+id/noFuelSpinner"
-                android:visibility="invisible"
-                style="@style/spinners" />
+                style="@style/spinners"
+                android:visibility="invisible" />
         </LinearLayout>
 
         <!-- GPS -->
-        <LinearLayout
-            style="@style/linearsCenter">
+        <LinearLayout style="@style/linearsCenter">
 
             <TextView
                 style="@style/textViews"
-                android:text="@string/gps"/>
+                android:text="@string/gps" />
 
             <CheckBox
+                android:id="@+id/ckxGps"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:id="@+id/ckxGps"
                 android:hint="Sí" />
         </LinearLayout>
 
         <!-- Rent Days -->
-        <LinearLayout
-            style="@style/linearsCenter">
+        <LinearLayout style="@style/linearsCenter">
 
             <TextView
                 style="@style/textViews"
-                android:text="@string/rent_days"/>
+                android:text="@string/rent_days" />
 
-            <LinearLayout
-                style="@style/linearsCenter">
+            <LinearLayout style="@style/linearsCenter">
 
                 <EditText
+                    android:id="@+id/rentDays"
                     android:layout_width="80dp"
                     android:layout_height="60dp"
-                    android:id="@+id/rentDays"
-                    android:inputType="number"
                     android:gravity="center"
-                    android:hint="000" />
+                    android:hint="000"
+                    android:inputType="number" />
             </LinearLayout>
         </LinearLayout>
 
         <!-- Prize -->
-        <LinearLayout
-            style="@style/linearsCenter">
+        <LinearLayout style="@style/linearsCenter">
 
             <TextView
                 android:layout_width="0dp"
@@ -137,8 +130,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:textAlignment="textEnd"
                 android:text="0"
+                android:textAlignment="textEnd"
                 android:textSize="20dp"
                 tools:ignore="RtlCompat" />
 
@@ -147,8 +140,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:textAlignment="textStart"
                 android:text=" €"
+                android:textAlignment="textStart"
                 android:textSize="20dp"
                 tools:ignore="RtlCompat" />
         </LinearLayout>
@@ -158,21 +151,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
         android:layout_weight="1"
-        android:gravity="center"
-        android:layout_marginBottom="10dp">
+        android:gravity="center">
 
         <Button
+            android:id="@+id/btnSend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/send"
-            android:textStyle="bold"
-            android:textColor="@color/black"
             android:backgroundTint="@color/white"
-            android:textSize="24dp"
+            android:gravity="center"
             android:paddingHorizontal="50dp"
             android:paddingVertical="15dp"
-            android:id="@+id/btnSend" />
+            android:text="@string/send"
+            android:textColor="@color/black"
+            android:textSize="24dp"
+            android:textStyle="bold" />
     </LinearLayout>
 </LinearLayout>

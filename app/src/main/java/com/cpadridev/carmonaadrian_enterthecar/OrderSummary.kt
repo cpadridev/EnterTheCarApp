@@ -3,7 +3,6 @@ package com.cpadridev.carmonaadrian_enterthecar
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -18,7 +17,9 @@ import com.cpadridev.carmonaadrian_enterthecar.databinding.OrderSummaryBinding
 class OrderSummary : AppCompatActivity() {
     private lateinit var binding: OrderSummaryBinding
 
-    private var person: Person? = null
+    // Create a variable "person". So we can share the same person for the different functions.
+    private lateinit var person: Person
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -28,7 +29,7 @@ class OrderSummary : AppCompatActivity() {
         if (intent.hasExtra(Intent.EXTRA_TEXT)) {
             val bundle = intent.getBundleExtra(Intent.EXTRA_TEXT)
 
-            person = bundle?.getParcelable("Person")
+            person = bundle?.getParcelable("Person")!!
 
             binding.name.text = person?.name
             binding.surnames.text = person?.surnames
@@ -78,7 +79,7 @@ class OrderSummary : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
+        return when (item.itemId) {
             // Redirect to gmail.
             R.id.gmail -> {
                 val intent = Intent().apply {

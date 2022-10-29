@@ -1,6 +1,5 @@
 package com.cpadridev.carmonaadrian_enterthecar
 
-import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -13,12 +12,11 @@ import com.cpadridev.carmonaadrian_enterthecar.databinding.PaymentSummaryBinding
 /**
 @author: Adrian Carmona
  */
-class PaymentSummary: AppCompatActivity() {
+class PaymentSummary : AppCompatActivity() {
     private lateinit var binding: PaymentSummaryBinding
     private lateinit var person: Person
     private lateinit var payment: Payment
 
-    private var validDate: Boolean = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -47,17 +45,22 @@ class PaymentSummary: AppCompatActivity() {
 
         binding.fabSend.setOnClickListener {
             val to = arrayOf("youremail@example.com")
-            val intent = Intent().apply{
+            val intent = Intent().apply {
                 action = Intent.ACTION_SEND
                 data = Uri.parse("mailto:")
                 type = "text/plain"
-                putExtra(Intent.EXTRA_SUBJECT, "${getString(R.string.proof_payment_title)} ${person?.name} ${person?.surnames}")
+                putExtra(
+                    Intent.EXTRA_SUBJECT,
+                    "${getString(R.string.proof_payment_title)} ${person?.name} ${person?.surnames}"
+                )
                 putExtra(Intent.EXTRA_EMAIL, to)
-                putExtra(Intent.EXTRA_TEXT,
+                putExtra(
+                    Intent.EXTRA_TEXT,
 
                     "\n ${getString(R.string.order)} ->" +
                             "\n\t${getString(R.string.vehicle)}: ${person?.vehicleType.toString()}" +
                             "${
+                                // Detect if the vehicle uses different fuel.
                                 if (person?.vehicleType.toString() == getString(R.string.tourism)) {
                                     "\n\t${getString(R.string.fuel)}: ${person?.fuelType.toString()}"
                                 } else {
@@ -91,7 +94,7 @@ class PaymentSummary: AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
+        return when (item.itemId) {
             // Redirect to gmail.
             R.id.gmail -> {
                 val intent = Intent().apply {

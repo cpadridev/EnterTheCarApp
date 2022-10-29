@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EnterTheCar - Adrián Carmona Peña -->
+<?xml version="1.0" encoding="utf-8"?><!-- EnterTheCar - Adrián Carmona Peña -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".PaymentForm">
 
@@ -21,15 +20,14 @@
 
             <TextView
                 style="@style/textViews"
-                android:text="@string/card_type"/>
+                android:text="@string/card_type" />
 
             <Spinner
                 android:id="@+id/cardType"
                 style="@style/spinners" />
         </LinearLayout>
 
-        <LinearLayout
-            style="@style/linearsCenter">
+        <LinearLayout style="@style/linearsCenter">
 
             <TextView
                 android:layout_width="match_parent"
@@ -37,36 +35,35 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/card_number"
-                android:textSize="18dp"/>
+                android:textSize="18dp" />
 
             <com.santalu.maskara.widget.MaskEditText
                 android:id="@+id/cardNumber"
                 style="@style/nameData"
                 android:hint="@string/hint_card_name"
                 android:inputType="number"
-                app:mask="#### #### #### ####"
-                android:maxLength="19"/>
+                android:maxLength="19"
+                app:mask="#### #### #### ####" />
         </LinearLayout>
 
         <!-- Rent Days -->
-        <LinearLayout
-            style="@style/linearsCenter">
+        <LinearLayout style="@style/linearsCenter">
+
             <TextView
                 style="@style/textViews"
-                android:text="@string/expiration_date"/>
+                android:text="@string/expiration_date" />
 
-            <LinearLayout
-                style="@style/linearsCenter">
+            <LinearLayout style="@style/linearsCenter">
 
                 <com.santalu.maskara.widget.MaskEditText
+                    android:id="@+id/expirationDate"
                     android:layout_width="80dp"
                     android:layout_height="60dp"
-                    android:id="@+id/expirationDate"
-                    android:inputType="number"
                     android:gravity="center"
+                    android:hint="00/00"
+                    android:inputType="number"
                     android:maxLength="5"
-                    app:mask="##/##"
-                    android:hint="00/00" />
+                    app:mask="##/##" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
@@ -75,21 +72,21 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
         android:layout_weight="1"
-        android:gravity="center"
-        android:layout_marginBottom="10dp">
+        android:gravity="center">
 
         <Button
+            android:id="@+id/btnSend"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/send"
-            android:textStyle="bold"
-            android:textColor="@color/black"
             android:backgroundTint="@color/white"
-            android:textSize="24dp"
+            android:gravity="center"
             android:paddingHorizontal="50dp"
             android:paddingVertical="15dp"
-            android:id="@+id/btnSend" />
+            android:text="@string/send"
+            android:textColor="@color/black"
+            android:textSize="24dp"
+            android:textStyle="bold" />
     </LinearLayout>
 </LinearLayout>

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- EnterTheCar - Adrián Carmona Peña -->
+<?xml version="1.0" encoding="utf-8"?><!-- EnterTheCar - Adrián Carmona Peña -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,75 +12,75 @@
         android:layout_weight="7"
         android:orientation="vertical">
 
-        <LinearLayout
-            style="@style/linearsCenter">
-            <TextView
-                style="@style/textViews"
-                android:text="@string/name"/>
+        <LinearLayout style="@style/linearsCenter">
 
             <TextView
                 style="@style/textViews"
-                android:id="@+id/name"/>
+                android:text="@string/name" />
+
+            <TextView
+                android:id="@+id/name"
+                style="@style/textViews" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/linearsCenter">
+
+            <TextView
+                style="@style/textViews"
+                android:text="@string/surnames" />
+
+            <TextView
+                android:id="@+id/surnames"
+                style="@style/textViews" />
+        </LinearLayout>
+
+        <LinearLayout style="@style/linearsCenter">
+
+            <TextView
+                style="@style/textViews"
+                android:text="@string/vehicle" />
+
+            <TextView
+                android:id="@+id/vehicle"
+                style="@style/textViews" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/fuelLayout"
             style="@style/linearsCenter">
-            <TextView
-                style="@style/textViews"
-                android:text="@string/surnames"/>
 
             <TextView
                 style="@style/textViews"
-                android:id="@+id/surnames"/>
+                android:text="@string/fuel" />
+
+            <TextView
+                android:id="@+id/fuel"
+                style="@style/textViews" />
         </LinearLayout>
 
-        <LinearLayout
-            style="@style/linearsCenter">
-            <TextView
-                style="@style/textViews"
-                android:text="@string/vehicle"/>
+        <LinearLayout style="@style/linearsCenter">
 
             <TextView
                 style="@style/textViews"
-                android:id="@+id/vehicle"/>
+                android:text="@string/gps" />
+
+            <TextView
+                android:id="@+id/gps"
+                style="@style/textViews" />
         </LinearLayout>
 
-        <LinearLayout
-            style="@style/linearsCenter"
-            android:id="@+id/fuelLayout">
-            <TextView
-                style="@style/textViews"
-                android:text="@string/fuel"/>
+        <LinearLayout style="@style/linearsCenter">
 
             <TextView
                 style="@style/textViews"
-                android:id="@+id/fuel"/>
+                android:text="@string/rent_days" />
+
+            <TextView
+                android:id="@+id/rentDays"
+                style="@style/textViews" />
         </LinearLayout>
 
-        <LinearLayout
-            style="@style/linearsCenter">
-            <TextView
-                style="@style/textViews"
-                android:text="@string/gps"/>
-
-            <TextView
-                style="@style/textViews"
-                android:id="@+id/gps"/>
-        </LinearLayout>
-
-        <LinearLayout
-            style="@style/linearsCenter">
-            <TextView
-                style="@style/textViews"
-                android:text="@string/rent_days"/>
-
-            <TextView
-                style="@style/textViews"
-                android:id="@+id/rentDays"/>
-        </LinearLayout>
-
-        <LinearLayout
-            style="@style/linearsCenter">
+        <LinearLayout style="@style/linearsCenter">
 
             <TextView
                 android:layout_width="0dp"
@@ -97,8 +96,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:textAlignment="textEnd"
                 android:text="0"
+                android:textAlignment="textEnd"
                 android:textSize="20dp"
                 tools:ignore="RtlCompat" />
 
@@ -107,8 +106,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:textAlignment="textStart"
                 android:text=" €"
+                android:textAlignment="textStart"
                 android:textSize="20dp"
                 tools:ignore="RtlCompat" />
         </LinearLayout>
@@ -118,24 +117,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
         android:layout_weight="1"
-        android:gravity="center"
-        android:layout_marginBottom="10dp">
+        android:gravity="center">
 
-        <LinearLayout
-            style="@style/linearsCenter">
+        <LinearLayout style="@style/linearsCenter">
+
             <Button
+                android:id="@+id/btnCancel"
                 style="@style/btnStyle"
-                android:text="@string/cancel"
-                android:id="@+id/btnCancel" />
+                android:text="@string/cancel" />
         </LinearLayout>
 
-        <LinearLayout
-            style="@style/linearsCenter">
+        <LinearLayout style="@style/linearsCenter">
+
             <Button
+                android:id="@+id/btnPay"
                 style="@style/btnStyle"
-                android:text="@string/pay"
-                android:id="@+id/btnPay" />
+                android:text="@string/pay" />
         </LinearLayout>
 
     </LinearLayout>
