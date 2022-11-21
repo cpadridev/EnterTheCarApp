@@ -20,6 +20,8 @@ class OrderSummary : AppCompatActivity() {
     // Create a variable "person". So we can share the same person for the different functions.
     private lateinit var person: Person
 
+    private var rentals: ArrayList<Person> = ArrayList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -30,29 +32,31 @@ class OrderSummary : AppCompatActivity() {
             val bundle = intent.getBundleExtra(Intent.EXTRA_TEXT)
 
             person = bundle?.getParcelable("Person")!!
+            rentals = bundle.getParcelableArrayList("Rentals")!!
 
-            binding.name.text = person?.name
-            binding.surnames.text = person?.surnames
-            binding.vehicle.text = person?.vehicleType
+            binding.name.text = person.name
+            binding.surnames.text = person.surnames
+            binding.vehicle.text = person.vehicleType
             binding.fuelLayout.isVisible = binding.vehicle.text == getString(R.string.tourism)
             if (binding.vehicle.text == getString(R.string.tourism)) {
-                binding.fuel.text = person?.fuelType
+                binding.fuel.text = person.fuelType
             }
             binding.gps.text =
-                if (person?.gps == true) {
+                if (person.gps) {
                     getString(R.string.yes)
                 } else {
                     getString(R.string.no)
                 }
-            binding.rentDays.text = person?.days
-            binding.totalPrice.text = person?.totalPrice
+            binding.rentDays.text = person.days
+            binding.totalPrice.text = person.totalPrice
         }
 
+        val bundle = Bundle()
+
+        bundle.putParcelable("Person", person)
+        bundle.putParcelableArrayList("Rentals", rentals)
+
         binding.btnCancel.setOnClickListener {
-            val bundle = Bundle()
-
-            bundle?.putParcelable("Person", person)
-
             val intent = Intent(this, MainActivity::class.java).apply {
                 putExtra(Intent.EXTRA_TEXT, bundle)
             }
@@ -61,10 +65,6 @@ class OrderSummary : AppCompatActivity() {
         }
 
         binding.btnPay.setOnClickListener {
-            val bundle = Bundle()
-
-            bundle?.putParcelable("Person", person)
-
             val intent = Intent(this, PaymentForm::class.java).apply {
                 putExtra(Intent.EXTRA_TEXT, bundle)
             }
@@ -74,7 +74,7 @@ class OrderSummary : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
+        menuInflater.inflate(R.menu.menu_rest, menu)
         return true
     }
 

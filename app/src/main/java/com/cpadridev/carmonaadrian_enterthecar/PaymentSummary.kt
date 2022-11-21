@@ -15,7 +15,8 @@ import com.cpadridev.carmonaadrian_enterthecar.databinding.PaymentSummaryBinding
 class PaymentSummary : AppCompatActivity() {
     private lateinit var binding: PaymentSummaryBinding
     private lateinit var person: Person
-    private lateinit var payment: Payment
+
+    private var rentals: ArrayList<Person> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,16 +28,24 @@ class PaymentSummary : AppCompatActivity() {
         if (intent.hasExtra(Intent.EXTRA_TEXT)) {
             val bundle = intent.getBundleExtra(Intent.EXTRA_TEXT)
 
-            person = bundle?.getParcelable("Person")!!
-            payment = bundle?.getParcelable("Payment")!!
+            person = bundle!!.getParcelable("Person")!!
+            rentals = bundle.getParcelableArrayList("Rentals")!!
 
-            binding.cardType.text = payment?.cardType
-            binding.cardNumber.text = payment?.cardNumber
-            binding.expirationDate.text = payment?.expirationDate
+            binding.cardType.text = person.payment?.cardType
+            binding.cardNumber.text = person.payment?.cardNumber
+            binding.expirationDate.text = person.payment?.expirationDate
+
+            rentals.add(person)
         }
 
         binding.btnAccept.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
+            val bundle = Bundle()
+
+            bundle.putParcelableArrayList("Rentals", rentals)
+
+            val intent = Intent(this, MainActivity::class.java).apply {
+                putExtra(Intent.EXTRA_TEXT, bundle)
+            }
 
             startActivity(intent)
 
@@ -51,35 +60,32 @@ class PaymentSummary : AppCompatActivity() {
                 type = "text/plain"
                 putExtra(
                     Intent.EXTRA_SUBJECT,
-                    "${getString(R.string.proof_payment_title)} ${person?.name} ${person?.surnames}"
+                    "${getString(R.string.proof_payment_title)} ${person.name} ${person.surnames}"
                 )
                 putExtra(Intent.EXTRA_EMAIL, to)
                 putExtra(
                     Intent.EXTRA_TEXT,
 
                     "\n ${getString(R.string.order)} ->" +
-                            "\n\t${getString(R.string.vehicle)}: ${person?.vehicleType.toString()}" +
-                            "${
-                                // Detect if the vehicle uses different fuel.
-                                if (person?.vehicleType.toString() == getString(R.string.tourism)) {
-                                    "\n\t${getString(R.string.fuel)}: ${person?.fuelType.toString()}"
-                                } else {
-                                    "".trim()
-                                }
-                            }" +
+                            "\n\t${getString(R.string.vehicle)}: ${person.vehicleType}" +
+                            (if (person.vehicleType == getString(R.string.tourism)) {
+                                "\n\t${getString(R.string.fuel)}: ${person.fuelType.toString()}"
+                            } else {
+                                "".trim()
+                            }) +
                             "\n\t${getString(R.string.gps)}: ${
-                                if (person?.gps == true) {
+                                if (person.gps) {
                                     getString(R.string.yes)
                                 } else {
                                     getString(R.string.no)
                                 }
                             }" +
-                            "\n\t${getString(R.string.rent_days)}: ${person?.days}" +
-                            "\n\t${getString(R.string.total_price)}: ${person?.totalPrice}" +
+                            "\n\t${getString(R.string.rent_days)}: ${person.days}" +
+                            "\n\t${getString(R.string.total_price)}: ${person.totalPrice}" +
                             "\n ${getString(R.string.payment)} ->" +
-                            "\n\t${getString(R.string.card_type)}: ${payment?.cardType}" +
-                            "\n\t${getString(R.string.card_number)}: ${payment?.cardNumber}" +
-                            "\n\t${getString(R.string.expiration_date)}: ${payment?.expirationDate}"
+                            "\n\t${getString(R.string.card_type)}: ${person.payment?.cardType}" +
+                            "\n\t${getString(R.string.card_number)}: ${person.payment?.cardNumber}" +
+                            "\n\t${getString(R.string.expiration_date)}: ${person.payment?.expirationDate}"
                 )
             }
 
@@ -89,7 +95,7 @@ class PaymentSummary : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
+        menuInflater.inflate(R.menu.menu_rest, menu)
         return true
     }
 

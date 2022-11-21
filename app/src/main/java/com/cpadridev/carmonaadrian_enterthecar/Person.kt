@@ -13,7 +13,8 @@ data class Person(
     val fuelType: String?,
     val gps: Boolean,
     val days: String,
-    val totalPrice: String
+    val totalPrice: String,
+    var payment: Payment?
 ) :
     Parcelable {
     companion object CREATOR : Parcelable.Creator<Person> {
@@ -33,7 +34,8 @@ data class Person(
         `in`.readString(),
         `in`.readInt() != 0,
         `in`.readString()!!,
-        `in`.readString()!!
+        `in`.readString()!!,
+        `in`.readParcelable(Payment.javaClass.classLoader)
     )
 
     override fun describeContents(): Int {
@@ -48,5 +50,6 @@ data class Person(
         out.writeInt(if (gps) 1 else 0)
         out.writeString(days)
         out.writeString(totalPrice)
+        out.writeParcelable(payment, flag)
     }
 }

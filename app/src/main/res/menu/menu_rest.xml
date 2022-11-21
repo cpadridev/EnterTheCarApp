@@ -5,6 +5,4 @@
         android:title="@string/gmail"/>
     <item android:id="@+id/about"
         android:title="@string/about"/>
-    <item android:id="@+id/rentals"
-        android:title="@string/rentals"/>
 </menu>

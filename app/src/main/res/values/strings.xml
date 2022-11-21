@@ -56,4 +56,6 @@
     <string name="payment_made">Pago realizado</string>
     <string name="pay">Pagar</string>
     <string name="error_valid_card">La tarjeta no es válida</string>
+    <string name="rentals">Alquileres</string>
+    <string name="back">Volver</string>
 </resources>

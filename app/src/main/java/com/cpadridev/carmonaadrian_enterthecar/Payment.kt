@@ -6,7 +6,7 @@ import android.os.Parcelable
 /**
 @author: Adrian Carmona
  */
-data class Payment(val cardType: String, val cardNumber: String, val expirationDate: String) :
+class Payment(val cardType: String, val cardNumber: String, val expirationDate: String) :
     Parcelable {
     companion object CREATOR : Parcelable.Creator<Payment> {
         override fun createFromParcel(`in`: Parcel): Payment {

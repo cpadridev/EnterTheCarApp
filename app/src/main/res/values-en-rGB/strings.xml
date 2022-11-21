@@ -44,4 +44,6 @@
     <string name="payment_made">Payment made</string>
     <string name="pay">Pay</string>
     <string name="error_valid_card">The card is not valid</string>
+    <string name="rentals">Rentals</string>
+    <string name="back">Back</string>
 </resources>

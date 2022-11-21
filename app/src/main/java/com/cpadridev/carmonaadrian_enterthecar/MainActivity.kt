@@ -21,6 +21,7 @@ import com.cpadridev.carmonaadrian_enterthecar.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
+    private var rentals: ArrayList<Person> = ArrayList()
     private var person: Person? = null
     private var price: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -126,38 +127,41 @@ class MainActivity : AppCompatActivity() {
             val bundle = intent.getBundleExtra(Intent.EXTRA_TEXT)
 
             person = bundle?.getParcelable("Person")
+            rentals = bundle?.getParcelableArrayList("Rentals")!!
 
-            binding.name.setText(person?.name)
-            binding.surnames.setText(person?.surnames)
-            binding.vehiclesSpinner.setSelection(
-                when (person?.vehicleType.toString()) {
-                    getString(R.string.motorbike) -> 1
-                    getString(R.string.scooter) -> 2
-                    else -> 0
+            if (person != null) {
+                binding.name.setText(person?.name)
+                binding.surnames.setText(person?.surnames)
+                binding.vehiclesSpinner.setSelection(
+                    when (person?.vehicleType.toString()) {
+                        getString(R.string.motorbike) -> 1
+                        getString(R.string.scooter) -> 2
+                        else -> 0
+                    }
+                )
+                binding.fuelSpinner.setSelection(
+                    when (person?.fuelType) {
+                        getString(R.string.gasoline) -> 1
+                        getString(R.string.electric) -> 2
+                        else -> 0
+                    }
+                )
+                // Recalculates price
+                if (person?.vehicleType != getString(R.string.tourism)) {
+                    binding.noFuelSpinner.isEnabled = false
+                    binding.fuelSpinner.isVisible = false
+                    binding.noFuelSpinner.isVisible = true
+                    price = when (person?.vehicleType.toString()) {
+                        getString(R.string.motorbike) -> 10
+                        else -> 5
+                    }
                 }
-            )
-            binding.fuelSpinner?.setSelection(
-                when (person?.fuelType) {
-                    getString(R.string.gasoline) -> 1
-                    getString(R.string.electric) -> 2
-                    else -> 0
+                binding.ckxGps.isChecked = person?.gps!!
+                binding.rentDays.setText(person?.days)
+                if (binding.rentDays.text.isNotEmpty()) {
+                    binding.totalPrice.text =
+                        (price * binding.rentDays.text.toString().toInt()).toString()
                 }
-            )
-            // Recalculates price
-            if (person?.vehicleType != getString(R.string.tourism)) {
-                binding.noFuelSpinner.isEnabled = false
-                binding.fuelSpinner.isVisible = false
-                binding.noFuelSpinner.isVisible = true
-                when (person?.vehicleType.toString()) {
-                    getString(R.string.motorbike) -> price = 10
-                    else -> price = 5
-                }
-            }
-            binding.ckxGps.isChecked = person?.gps!!
-            binding.rentDays.setText(person?.days)
-            if (binding.rentDays.text.isNotEmpty()) {
-                binding.totalPrice.text =
-                    (price * binding.rentDays.text.toString().toInt()).toString()
             }
         }
 
@@ -193,12 +197,14 @@ class MainActivity : AppCompatActivity() {
                     binding.fuelSpinner.selectedItem?.toString(),
                     binding.ckxGps.isChecked,
                     binding.rentDays.text.toString(),
-                    binding.totalPrice.text.toString()
+                    binding.totalPrice.text.toString(),
+                    Payment("", "", "")
                 )
 
                 val bundle = Bundle()
 
                 bundle.putParcelable("Person", person)
+                bundle.putParcelableArrayList("Rentals", rentals)
 
                 val intent = Intent(this, OrderSummary::class.java).apply {
                     putExtra(Intent.EXTRA_TEXT, bundle)
@@ -232,6 +238,18 @@ class MainActivity : AppCompatActivity() {
             // Shows the version of the application and the author.
             R.id.about -> {
                 Toast.makeText(this, getString(R.string.about_content), Toast.LENGTH_LONG).show()
+                true
+            }
+            R.id.rentals -> {
+                val bundle = Bundle()
+
+                bundle.putParcelableArrayList("Rentals", rentals)
+
+                val intent = Intent(this, Rentals::class.java).apply {
+                    putExtra(Intent.EXTRA_TEXT, bundle)
+                }
+
+                startActivity(intent)
                 true
             }
             else -> super.onOptionsItemSelected(item)

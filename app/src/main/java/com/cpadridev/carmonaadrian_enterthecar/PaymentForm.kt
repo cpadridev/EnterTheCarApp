@@ -19,6 +19,7 @@ class PaymentForm : AppCompatActivity() {
 
     // "payment" is the same as that "person".
     private lateinit var payment: Payment
+    private var rentals: ArrayList<Person> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +32,16 @@ class PaymentForm : AppCompatActivity() {
             val bundle = intent.getBundleExtra(Intent.EXTRA_TEXT)
 
             person = bundle?.getParcelable("Person")!!
+            rentals = bundle.getParcelableArrayList("Rentals")!!
+
+            binding.cardType.setSelection(
+                when(person.payment?.cardType) {
+                    getString(R.string.visa) -> 0
+                    getString(R.string.mastercard) -> 1
+                    else -> 2
+                })
+            binding.cardNumber.setText(person.payment?.cardNumber)
+            binding.expirationDate.setText(person.payment?.expirationDate)
         }
 
         ArrayAdapter.createFromResource(
@@ -43,7 +54,7 @@ class PaymentForm : AppCompatActivity() {
         }
 
         binding.btnSend.setOnClickListener {
-            var date = binding.expirationDate.text
+            val date = binding.expirationDate.text
 
             if (binding.cardNumber.text?.isNotEmpty()!! && binding.expirationDate.text?.isNotEmpty()!!) {
                 // Detect if card number is correct
@@ -57,10 +68,12 @@ class PaymentForm : AppCompatActivity() {
                             binding.expirationDate.text.toString()
                         )
 
+                        person.payment = payment
+
                         val bundle = Bundle()
 
                         bundle.putParcelable("Person", person)
-                        bundle.putParcelable("Payment", payment)
+                        bundle.putParcelableArrayList("Rentals", rentals)
 
                         val intent = Intent(this, PaymentSummary::class.java).apply {
                             putExtra(Intent.EXTRA_TEXT, bundle)
@@ -83,7 +96,7 @@ class PaymentForm : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
+        menuInflater.inflate(R.menu.menu_rest, menu)
         return true
     }
 
