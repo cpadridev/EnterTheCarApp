@@ -25,7 +25,7 @@ class Rentals : AppCompatActivity() {
         if (intent.hasExtra(Intent.EXTRA_TEXT)) {
             val bundle = intent.getBundleExtra(Intent.EXTRA_TEXT)
 
-            rentals = bundle!!.getParcelableArrayList("Rentals")!!
+            rentals = bundle?.getParcelableArrayList("Rentals")!!
         }
 
         val recycler = binding.ryvRentals
@@ -39,15 +39,20 @@ class Rentals : AppCompatActivity() {
         recycler.adapter = PersonAdapter(rentals)
 
         binding.btnBack.setOnClickListener {
-            val bundle = Bundle()
+            if (rentals.size != 0) {
+                val bundle = Bundle()
 
-            bundle.putParcelableArrayList("Rentals", rentals)
+                bundle.putParcelableArrayList("Rentals", rentals)
 
-            val intent = Intent(this, MainActivity::class.java).apply {
-                putExtra(Intent.EXTRA_TEXT, bundle)
+                val intent = Intent(this, MainActivity::class.java).apply {
+                    putExtra(Intent.EXTRA_TEXT, bundle)
+                }
+
+                startActivity(intent)
+            } else {
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
             }
-
-            startActivity(intent)
         }
     }
 
