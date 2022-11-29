@@ -22,12 +22,6 @@ class Rentals : AppCompatActivity() {
         binding = RentalsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        if (intent.hasExtra(Intent.EXTRA_TEXT)) {
-            val bundle = intent.getBundleExtra(Intent.EXTRA_TEXT)
-
-            rentals = bundle?.getParcelableArrayList("Rentals")!!
-        }
-
         val recycler = binding.ryvRentals
 
         recycler.setHasFixedSize(true)
@@ -39,20 +33,8 @@ class Rentals : AppCompatActivity() {
         recycler.adapter = PersonAdapter(rentals)
 
         binding.btnBack.setOnClickListener {
-            if (rentals.size != 0) {
-                val bundle = Bundle()
-
-                bundle.putParcelableArrayList("Rentals", rentals)
-
-                val intent = Intent(this, MainActivity::class.java).apply {
-                    putExtra(Intent.EXTRA_TEXT, bundle)
-                }
-
-                startActivity(intent)
-            } else {
-                val intent = Intent(this, MainActivity::class.java)
-                startActivity(intent)
-            }
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
     }
 

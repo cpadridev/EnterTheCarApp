@@ -16,8 +16,6 @@ class PaymentSummary : AppCompatActivity() {
     private lateinit var binding: PaymentSummaryBinding
     private lateinit var person: Person
 
-    private var rentals: ArrayList<Person> = ArrayList()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -29,24 +27,14 @@ class PaymentSummary : AppCompatActivity() {
             val bundle = intent.getBundleExtra(Intent.EXTRA_TEXT)
 
             person = bundle!!.getParcelable("Person")!!
-            rentals = bundle.getParcelableArrayList("Rentals")!!
 
             binding.cardType.text = person.payment?.cardType
             binding.cardNumber.text = person.payment?.cardNumber
             binding.expirationDate.text = person.payment?.expirationDate
-
-            rentals.add(person)
         }
 
         binding.btnAccept.setOnClickListener {
-            val bundle = Bundle()
-
-            bundle.putParcelableArrayList("Rentals", rentals)
-
-            val intent = Intent(this, MainActivity::class.java).apply {
-                putExtra(Intent.EXTRA_TEXT, bundle)
-            }
-
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
 
             Toast.makeText(this, getString(R.string.payment_made), Toast.LENGTH_LONG).show()

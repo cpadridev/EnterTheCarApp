@@ -19,7 +19,6 @@ class PaymentForm : AppCompatActivity() {
 
     // "payment" is the same as that "person".
     private lateinit var payment: Payment
-    private var rentals: ArrayList<Person> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +31,6 @@ class PaymentForm : AppCompatActivity() {
             val bundle = intent.getBundleExtra(Intent.EXTRA_TEXT)
 
             person = bundle?.getParcelable("Person")!!
-            rentals = bundle.getParcelableArrayList("Rentals")!!
 
             binding.cardType.setSelection(
                 when(person.payment?.cardType) {
@@ -73,7 +71,6 @@ class PaymentForm : AppCompatActivity() {
                         val bundle = Bundle()
 
                         bundle.putParcelable("Person", person)
-                        bundle.putParcelableArrayList("Rentals", rentals)
 
                         val intent = Intent(this, PaymentSummary::class.java).apply {
                             putExtra(Intent.EXTRA_TEXT, bundle)

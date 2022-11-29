@@ -21,7 +21,6 @@ import com.cpadridev.carmonaadrian_enterthecar.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
-    private var rentals: ArrayList<Person> = ArrayList()
     private var person: Person? = null
     private var price: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -127,7 +126,6 @@ class MainActivity : AppCompatActivity() {
             val bundle = intent.getBundleExtra(Intent.EXTRA_TEXT)
 
             person = bundle?.getParcelable("Person")
-            rentals = bundle?.getParcelableArrayList("Rentals")!!
 
             if (person != null) {
                 binding.name.setText(person?.name)
@@ -204,7 +202,6 @@ class MainActivity : AppCompatActivity() {
                 val bundle = Bundle()
 
                 bundle.putParcelable("Person", person)
-                bundle.putParcelableArrayList("Rentals", rentals)
 
                 val intent = Intent(this, OrderSummary::class.java).apply {
                     putExtra(Intent.EXTRA_TEXT, bundle)
@@ -241,14 +238,7 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.rentals -> {
-                val bundle = Bundle()
-
-                bundle.putParcelableArrayList("Rentals", rentals)
-
-                val intent = Intent(this, Rentals::class.java).apply {
-                    putExtra(Intent.EXTRA_TEXT, bundle)
-                }
-
+                val intent = Intent(this, Rentals::class.java)
                 startActivity(intent)
                 true
             }

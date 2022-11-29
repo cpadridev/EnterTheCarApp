@@ -20,8 +20,6 @@ class OrderSummary : AppCompatActivity() {
     // Create a variable "person". So we can share the same person for the different functions.
     private lateinit var person: Person
 
-    private var rentals: ArrayList<Person> = ArrayList()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -32,7 +30,6 @@ class OrderSummary : AppCompatActivity() {
             val bundle = intent.getBundleExtra(Intent.EXTRA_TEXT)
 
             person = bundle?.getParcelable("Person")!!
-            rentals = bundle.getParcelableArrayList("Rentals")!!
 
             binding.name.text = person.name
             binding.surnames.text = person.surnames
@@ -54,7 +51,6 @@ class OrderSummary : AppCompatActivity() {
         val bundle = Bundle()
 
         bundle.putParcelable("Person", person)
-        bundle.putParcelableArrayList("Rentals", rentals)
 
         binding.btnCancel.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java).apply {
