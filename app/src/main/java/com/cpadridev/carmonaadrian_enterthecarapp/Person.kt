@@ -33,9 +33,9 @@ data class Person(
         `in`.readString()!!,
         `in`.readString(),
         `in`.readInt() != 0,
-        `in`.readInt()!!,
-        `in`.readInt()!!,
-        `in`.readParcelable(Payment.javaClass.classLoader)
+        `in`.readInt(),
+        `in`.readInt(),
+        `in`.readParcelable(Payment::class.java.classLoader)
     )
 
     override fun describeContents(): Int {

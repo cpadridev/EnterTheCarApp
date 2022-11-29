@@ -47,4 +47,6 @@
     <string name="rentals">Rentals</string>
     <string name="back">Back</string>
     <string name="error_response">Response failed</string>
+    <string name="template_price_day">€ / day</string>
+    <string name="successful_insert_rent">Rent inserted successfully</string>
 </resources>

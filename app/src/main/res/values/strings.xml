@@ -60,4 +60,5 @@
     <string name="back">Volver</string>
     <string name="error_response">Fallo en la respuesta</string>
     <string name="successful_insert_rent">Alquiler insertado correctamente</string>
+    <string name="template_price_day">€ / día</string>
 </resources>

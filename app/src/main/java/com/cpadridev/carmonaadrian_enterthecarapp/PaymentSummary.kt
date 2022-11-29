@@ -53,7 +53,7 @@ class PaymentSummary : AppCompatActivity() {
                     getString(R.string.tourism) -> "tourism"
                     getString(R.string.motorbike) -> "motorbike"
                     getString(R.string.scooter) -> "scooter"
-                    else -> "Unknown" },
+                    else -> person.vehicleType },
                 person.days,
                 person.totalPrice))
 
@@ -106,13 +106,8 @@ class PaymentSummary : AppCompatActivity() {
     }
 
     private fun insertData(rental: Rental){
-        // Hacemos uso de la ApiTrabajadores creada para obtener los valores pedidos.
         val api: ApiEnterTheCar? = retrofit?.create(ApiEnterTheCar::class.java)
 
-        // Guardamos el trabajador
-
-        // Realizamos una petición asíncrona y debemos implementar un Callback con dos métodos:
-        // onResponse y onFailure.
         api?.saveRent(rental.name, rental.vehicle, rental.days, rental.price)?.enqueue(object :
             Callback<Rental> {
             override fun onResponse(call: Call<Rental>, response: Response<Rental>) {

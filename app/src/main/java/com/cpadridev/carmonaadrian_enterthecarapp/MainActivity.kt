@@ -13,7 +13,14 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.core.view.isVisible
+import com.cpadridev.carmonaadrian_enterthecarapp.connection.ApiEnterTheCar
+import com.cpadridev.carmonaadrian_enterthecarapp.connection.Client
 import com.cpadridev.carmonaadrian_enterthecarapp.databinding.ActivityMainBinding
+import com.cpadridev.carmonaadrian_enterthecarapp.model.Vehicle
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
 
 /**
 @author: Adrian Carmona
@@ -21,6 +28,8 @@ import com.cpadridev.carmonaadrian_enterthecarapp.databinding.ActivityMainBindin
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
+    private var retrofit: Retrofit? = null
+    private var vehicles: ArrayList<Vehicle> = ArrayList()
     private var person: Person? = null
     private var price: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,15 +38,18 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        retrofit = Client.getClient()
+        getData()
+
+        vehicles.add(Vehicle(null, "tourism", 25))
+        vehicles.add(Vehicle(null, "motorbike", 10))
+        vehicles.add(Vehicle(null, "scooter", 5))
+        vehicles.add(Vehicle(null, "Camion", 50))
+
         // Creation of the vehicle spinner.
-        ArrayAdapter.createFromResource(
-            this,
-            R.array.vehicles_array,
-            android.R.layout.simple_spinner_item
-        ).also { adapter ->
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            binding.vehiclesSpinner.adapter = adapter
-        }
+        val vehicleAdapter = ArrayAdapter<Vehicle>(this, android.R.layout.simple_spinner_item, vehicles)
+        vehicleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.vehiclesSpinner.adapter = vehicleAdapter
 
         // Creation of the fuel spinner.
         ArrayAdapter.createFromResource(
@@ -68,20 +80,18 @@ class MainActivity : AppCompatActivity() {
                     id: Long
                 ) {
                     // Item selected
-                    val item = binding.vehiclesSpinner.getItemAtPosition(pos).toString()
+                    val item: Vehicle = binding.vehiclesSpinner.getItemAtPosition(pos) as Vehicle
+                    val item2 = binding.vehiclesSpinner.getItemAtPosition(pos).toString()
                     // Get an array from string resources
                     val vehiclesArray = resources.getStringArray(R.array.vehicles_array)
 
                     // Disable no fuel
                     binding.noFuelSpinner.isEnabled = false
-                    binding.fuelSpinner.isVisible = item == vehiclesArray[0]
-                    binding.noFuelSpinner.isVisible = item != vehiclesArray[0]
+                    binding.fuelSpinner.isVisible = item2 == vehiclesArray[0]
+                    binding.noFuelSpinner.isVisible = item2 != vehiclesArray[0]
 
                     // Change the price depending on the selected vehicle
-                    when (item) {
-                        vehiclesArray[1] -> price = 10
-                        vehiclesArray[2] -> price = 5
-                    }
+                    price = item.price
 
                     // Calculate the price
                     if (binding.rentDays.text.isNotEmpty()) {
@@ -214,6 +224,31 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+    }
+
+    private fun getData() {
+        val api: ApiEnterTheCar? = retrofit?.create(ApiEnterTheCar::class.java)
+
+        api?.getVehicles()?.enqueue(object : Callback<ArrayList<Vehicle>> {
+            override fun onResponse(call: Call<ArrayList<Vehicle>>, response: Response<ArrayList<Vehicle>>) {
+                if (response.isSuccessful) {
+                    val vehiclesList = response.body()
+
+                    if (vehiclesList != null) {
+                       vehicles = vehiclesList
+                    }
+                } else
+                    Toast.makeText(
+                        applicationContext,
+                        getString(R.string.error_response),
+                        Toast.LENGTH_SHORT
+                    ).show()
+            }
+
+            override fun onFailure(call: Call<ArrayList<Vehicle>>, t: Throwable) {
+                Toast.makeText(applicationContext, t.message, Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

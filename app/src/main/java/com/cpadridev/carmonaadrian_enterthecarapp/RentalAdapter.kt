@@ -46,10 +46,10 @@ class RentalAdapter: RecyclerView.Adapter<RentalAdapter.MyViewHolder>() {
             }
             "motorbike" -> Resources.getSystem().getString(R.string.motorbike)
             "scooter" -> Resources.getSystem().getString(R.string.scooter)
-            else -> "Unknown"
+            else -> list[position].vehicle
         }
-        viewHolder.txvDays.text = "Days: " + list[position].days.toString()
-        viewHolder.txvPrice.text = "Price: " + list[position].price.toString() + "€"
+        viewHolder.txvDays.text = "Days: ${list[position].days}"
+        viewHolder.txvPrice.text = "Price: ${list[position].price}€"
     }
 
     override fun getItemCount() = list.size
