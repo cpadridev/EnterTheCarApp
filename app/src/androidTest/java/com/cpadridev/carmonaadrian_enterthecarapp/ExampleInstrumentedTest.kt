@@ -1,4 +1,4 @@
-package com.cpadridev.carmonaadrian_enterthecar
+package com.cpadridev.carmonaadrian_enterthecarapp
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

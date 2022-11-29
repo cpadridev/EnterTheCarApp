@@ -1,4 +1,4 @@
-package com.cpadridev.carmonaadrian_enterthecar
+package com.cpadridev.carmonaadrian_enterthecarapp
 
 import android.content.Intent
 import android.net.Uri
@@ -8,7 +8,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import com.cpadridev.carmonaadrian_enterthecar.databinding.OrderSummaryBinding
+import com.cpadridev.carmonaadrian_enterthecarapp.databinding.OrderSummaryBinding
 
 
 /**

@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.CarmonaAdrian_EnterTheCar" parent="Theme.Material3.Dark">
+    <style name="Theme.CarmonaAdrian_EnterTheCarApp" parent="Theme.Material3.Dark">
         <item name="colorPrimary">#A0CFFF</item>
         <item name="colorOnPrimaryContainer">@color/black</item>
     </style>

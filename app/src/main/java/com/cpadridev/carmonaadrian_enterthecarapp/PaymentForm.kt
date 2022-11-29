@@ -1,4 +1,4 @@
-package com.cpadridev.carmonaadrian_enterthecar
+package com.cpadridev.carmonaadrian_enterthecarapp
 
 import android.content.Intent
 import android.net.Uri
@@ -8,7 +8,7 @@ import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.cpadridev.carmonaadrian_enterthecar.databinding.PaymentFormBinding
+import com.cpadridev.carmonaadrian_enterthecarapp.databinding.PaymentFormBinding
 
 /**
 @author: Adrian Carmona

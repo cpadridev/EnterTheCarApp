@@ -1,4 +1,4 @@
-package com.cpadridev.carmonaadrian_enterthecar
+package com.cpadridev.carmonaadrian_enterthecarapp
 
 import android.content.res.Resources
 import android.view.LayoutInflater
