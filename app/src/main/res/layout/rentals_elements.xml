@@ -7,10 +7,16 @@
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/txvNameAndSurnames"
+        android:id="@+id/txvId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Name and surnames" />
+        tools:text="Id" />
+
+    <TextView
+        android:id="@+id/txvName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Name" />
 
     <TextView
         android:id="@+id/txvVehicle"

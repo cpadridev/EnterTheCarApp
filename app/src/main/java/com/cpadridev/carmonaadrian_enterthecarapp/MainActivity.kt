@@ -155,7 +155,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 binding.ckxGps.isChecked = person?.gps!!
-                binding.rentDays.setText(person?.days)
+                binding.rentDays.setText(person?.days.toString())
                 if (binding.rentDays.text.isNotEmpty()) {
                     binding.totalPrice.text =
                         (price * binding.rentDays.text.toString().toInt()).toString()
@@ -194,8 +194,8 @@ class MainActivity : AppCompatActivity() {
                     binding.vehiclesSpinner.selectedItem.toString(),
                     binding.fuelSpinner.selectedItem?.toString(),
                     binding.ckxGps.isChecked,
-                    binding.rentDays.text.toString(),
-                    binding.totalPrice.text.toString(),
+                    binding.rentDays.text.toString().toInt(),
+                    binding.totalPrice.text.toString().toInt(),
                     Payment("", "", "")
                 )
 

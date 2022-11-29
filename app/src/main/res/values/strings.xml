@@ -58,4 +58,6 @@
     <string name="error_valid_card">La tarjeta no es válida</string>
     <string name="rentals">Alquileres</string>
     <string name="back">Volver</string>
+    <string name="error_response">Fallo en la respuesta</string>
+    <string name="successful_insert_rent">Alquiler insertado correctamente</string>
 </resources>

@@ -7,7 +7,15 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.cpadridev.carmonaadrian_enterthecarapp.connection.ApiEnterTheCar
+import com.cpadridev.carmonaadrian_enterthecarapp.connection.Client
 import com.cpadridev.carmonaadrian_enterthecarapp.databinding.PaymentSummaryBinding
+import com.cpadridev.carmonaadrian_enterthecarapp.model.Rental
+import com.google.android.material.snackbar.Snackbar
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
 
 /**
 @author: Adrian Carmona
@@ -15,6 +23,9 @@ import com.cpadridev.carmonaadrian_enterthecarapp.databinding.PaymentSummaryBind
 class PaymentSummary : AppCompatActivity() {
     private lateinit var binding: PaymentSummaryBinding
     private lateinit var person: Person
+
+    private var retrofit: Retrofit?= null
+    private var rentalAdapter: RentalAdapter ?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +44,19 @@ class PaymentSummary : AppCompatActivity() {
             binding.expirationDate.text = person.payment?.expirationDate
         }
 
+        retrofit = Client.getClient()
+
         binding.btnAccept.setOnClickListener {
+            insertData(Rental(null,
+                person.name + " " + person.surnames,
+                when(person.vehicleType) {
+                    getString(R.string.tourism) -> "tourism"
+                    getString(R.string.motorbike) -> "motorbike"
+                    getString(R.string.scooter) -> "scooter"
+                    else -> "Unknown" },
+                person.days,
+                person.totalPrice))
+
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
 
@@ -80,6 +103,37 @@ class PaymentSummary : AppCompatActivity() {
             val envIntent = Intent.createChooser(intent, null)
             startActivity(envIntent)
         }
+    }
+
+    private fun insertData(rental: Rental){
+        // Hacemos uso de la ApiTrabajadores creada para obtener los valores pedidos.
+        val api: ApiEnterTheCar? = retrofit?.create(ApiEnterTheCar::class.java)
+
+        // Guardamos el trabajador
+
+        // Realizamos una petición asíncrona y debemos implementar un Callback con dos métodos:
+        // onResponse y onFailure.
+        api?.saveRent(rental.name, rental.vehicle, rental.days, rental.price)?.enqueue(object :
+            Callback<Rental> {
+            override fun onResponse(call: Call<Rental>, response: Response<Rental>) {
+                if (response.isSuccessful) {
+                    val rent = response.body()
+
+                    if (rent != null) {
+                        rentalAdapter?.addList(rent)
+                        Snackbar.make(binding.root, getString(R.string.successful_insert_rent), Snackbar.LENGTH_LONG)
+                            .setAction(getString(R.string.accept)){
+                            }
+                            .show()
+                    }
+                } else
+                    Toast.makeText(applicationContext,getString(R.string.error_response), Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onFailure(call: Call<Rental>, t: Throwable) {
+                Toast.makeText(applicationContext, t.message, Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

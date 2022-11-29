@@ -12,8 +12,8 @@ data class Person(
     val vehicleType: String,
     val fuelType: String?,
     val gps: Boolean,
-    val days: String,
-    val totalPrice: String,
+    val days: Int,
+    val totalPrice: Int,
     var payment: Payment?
 ) :
     Parcelable {
@@ -33,8 +33,8 @@ data class Person(
         `in`.readString()!!,
         `in`.readString(),
         `in`.readInt() != 0,
-        `in`.readString()!!,
-        `in`.readString()!!,
+        `in`.readInt()!!,
+        `in`.readInt()!!,
         `in`.readParcelable(Payment.javaClass.classLoader)
     )
 
@@ -48,8 +48,8 @@ data class Person(
         out.writeString(vehicleType)
         out.writeString(fuelType)
         out.writeInt(if (gps) 1 else 0)
-        out.writeString(days)
-        out.writeString(totalPrice)
+        out.writeInt(days)
+        out.writeInt(totalPrice)
         out.writeParcelable(payment, flag)
     }
 }

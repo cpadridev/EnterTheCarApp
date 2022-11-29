@@ -44,8 +44,8 @@ class OrderSummary : AppCompatActivity() {
                 } else {
                     getString(R.string.no)
                 }
-            binding.rentDays.text = person.days
-            binding.totalPrice.text = person.totalPrice
+            binding.rentDays.text = person.days.toString()
+            binding.totalPrice.text = person.totalPrice.toString()
         }
 
         val bundle = Bundle()
