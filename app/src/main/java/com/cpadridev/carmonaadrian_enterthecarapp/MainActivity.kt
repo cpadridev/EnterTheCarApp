@@ -41,12 +41,12 @@ class MainActivity : AppCompatActivity() {
         retrofit = Client.getClient()
 
         getData()
-/*
+
         vehicles.add(Vehicle(1, "tourism", 25))
         vehicles.add(Vehicle(2, "motorbike", 10))
         vehicles.add(Vehicle(3, "scooter", 5))
         vehicles.add(Vehicle(4, "truck", 50))
-*/
+
         // Creation of the vehicle spinner.
         val vehicleAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, vehicles)
         vehicleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -83,13 +83,11 @@ class MainActivity : AppCompatActivity() {
                     // Item selected
                     val item: Vehicle = binding.vehiclesSpinner.getItemAtPosition(pos) as Vehicle
                     val item2 = binding.vehiclesSpinner.getItemAtPosition(pos).toString()
-                    // Get an array from string resources
-                    val vehiclesArray = resources.getStringArray(R.array.vehicles_array)
 
                     // Disable no fuel
                     binding.noFuelSpinner.isEnabled = false
-                    binding.fuelSpinner.isVisible = item2 == vehiclesArray[0]
-                    binding.noFuelSpinner.isVisible = item2 != vehiclesArray[0]
+                    binding.fuelSpinner.isVisible = item2 == getString(R.string.tourism)
+                    binding.noFuelSpinner.isVisible = item2 != getString(R.string.tourism)
 
                     // Change the price depending on the selected vehicle
                     price = item.price

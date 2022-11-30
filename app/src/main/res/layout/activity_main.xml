@@ -62,8 +62,7 @@
         <LinearLayout
             android:id="@+id/fuelLayout"
             style="@style/linearsCenter"
-            android:layout_marginTop="5dp"
-            android:visibility="gone">
+            android:layout_marginTop="5dp">
 
             <TextView
                 style="@style/textViews"
