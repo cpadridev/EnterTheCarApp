@@ -115,7 +115,7 @@ class PaymentSummary : AppCompatActivity() {
                     val rent = response.body()
 
                     if (rent != null) {
-                        rentalAdapter?.addList(rent)
+                        rentalAdapter?.addToList(rent)
                         Snackbar.make(binding.root, getString(R.string.successful_insert_rent), Snackbar.LENGTH_LONG)
                             .setAction(getString(R.string.accept)){
                             }

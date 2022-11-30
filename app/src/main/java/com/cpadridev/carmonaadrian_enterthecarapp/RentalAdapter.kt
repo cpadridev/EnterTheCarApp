@@ -35,33 +35,21 @@ class RentalAdapter: RecyclerView.Adapter<RentalAdapter.MyViewHolder>() {
     override fun onBindViewHolder(viewHolder: MyViewHolder, position: Int) {
         viewHolder.txvId.text = list[position].id.toString()
         viewHolder.txvName.text = list[position].name
-        viewHolder.txvVehicle.text = when(list[position].vehicle) {
-            "tourism" -> {
-                 Resources.getSystem().getString(R.string.tourism) + " - " +
-                        when(list[position].price / list[position].days) {
-                            25 -> Resources.getSystem().getString(R.string.diesel)
-                            20 -> Resources.getSystem().getString(R.string.gasoline)
-                            else -> Resources.getSystem().getString(R.string.electric)
-                        }
-            }
-            "motorbike" -> Resources.getSystem().getString(R.string.motorbike)
-            "scooter" -> Resources.getSystem().getString(R.string.scooter)
-            else -> list[position].vehicle
-        }
+        viewHolder.txvVehicle.text = list[position].vehicle
         viewHolder.txvDays.text = "Days: ${list[position].days}"
         viewHolder.txvPrice.text = "Price: ${list[position].price}€"
     }
 
     override fun getItemCount() = list.size
 
-    fun addList(list_: ArrayList<Rental>){
+    fun addToList(list_: ArrayList<Rental>){
         list.clear()
         list.addAll(list_)
 
         notifyDataSetChanged()
     }
 
-    fun addList(rental: Rental) {
+    fun addToList(rental: Rental) {
         list.add(rental)
 
         notifyDataSetChanged()

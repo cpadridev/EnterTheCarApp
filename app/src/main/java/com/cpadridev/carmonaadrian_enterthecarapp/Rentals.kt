@@ -62,7 +62,7 @@ class Rentals : AppCompatActivity() {
                     val rentalsList = response.body()
 
                     if (rentalsList != null) {
-                        rentalAdapter?.addList(rentalsList)
+                        rentalAdapter?.addToList(rentalsList)
                     }
                 } else
                     Toast.makeText(

@@ -63,7 +63,7 @@
             android:id="@+id/fuelLayout"
             style="@style/linearsCenter"
             android:layout_marginTop="5dp"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <TextView
                 style="@style/textViews"
@@ -76,7 +76,7 @@
             <Spinner
                 android:id="@+id/noFuelSpinner"
                 style="@style/spinners"
-                android:visibility="invisible" />
+                android:visibility="gone" />
         </LinearLayout>
 
         <!-- GPS -->

@@ -39,15 +39,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         retrofit = Client.getClient()
+
         getData()
-
-        vehicles.add(Vehicle(null, "tourism", 25))
-        vehicles.add(Vehicle(null, "motorbike", 10))
-        vehicles.add(Vehicle(null, "scooter", 5))
-        vehicles.add(Vehicle(null, "Camion", 50))
-
+/*
+        vehicles.add(Vehicle(1, "tourism", 25))
+        vehicles.add(Vehicle(2, "motorbike", 10))
+        vehicles.add(Vehicle(3, "scooter", 5))
+        vehicles.add(Vehicle(4, "truck", 50))
+*/
         // Creation of the vehicle spinner.
-        val vehicleAdapter = ArrayAdapter<Vehicle>(this, android.R.layout.simple_spinner_item, vehicles)
+        val vehicleAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, vehicles)
         vehicleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.vehiclesSpinner.adapter = vehicleAdapter
 
@@ -223,7 +224,6 @@ class MainActivity : AppCompatActivity() {
                     .show()
             }
         }
-
     }
 
     private fun getData() {
@@ -235,14 +235,10 @@ class MainActivity : AppCompatActivity() {
                     val vehiclesList = response.body()
 
                     if (vehiclesList != null) {
-                       vehicles = vehiclesList
+                        vehicles = vehiclesList
                     }
                 } else
-                    Toast.makeText(
-                        applicationContext,
-                        getString(R.string.error_response),
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(applicationContext, getString(R.string.error_response), Toast.LENGTH_SHORT).show()
             }
 
             override fun onFailure(call: Call<ArrayList<Vehicle>>, t: Throwable) {
