@@ -53,7 +53,7 @@ class PaymentSummary : AppCompatActivity() {
                     getString(R.string.tourism) -> "tourism"
                     getString(R.string.motorbike) -> "motorbike"
                     getString(R.string.scooter) -> "scooter"
-                    else -> person.vehicleType },
+                    else -> person.vehicleType.substring(0, person.vehicleType.indexOf(" ")) },
                 person.days,
                 person.totalPrice))
 

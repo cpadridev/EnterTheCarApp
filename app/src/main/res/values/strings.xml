@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name" translatable="false">EnterTheCarApp</string>
+    <string name="app_name" translatable="false">CarmonaAdrian_EnterTheCarApp</string>
     <string name="name">Nombre:</string>
     <string name="hint_name">Nombre</string>
     <string name="surnames">Apellidos:</string>

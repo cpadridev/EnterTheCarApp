@@ -29,7 +29,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 
     private var retrofit: Retrofit? = null
-    private var vehicles: ArrayList<Vehicle> = ArrayList()
     private var person: Person? = null
     private var price: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,15 +41,12 @@ class MainActivity : AppCompatActivity() {
 
         getData()
 
+        /*
         vehicles.add(Vehicle(1, "tourism", 25))
         vehicles.add(Vehicle(2, "motorbike", 10))
         vehicles.add(Vehicle(3, "scooter", 5))
         vehicles.add(Vehicle(4, "truck", 50))
-
-        // Creation of the vehicle spinner.
-        val vehicleAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, vehicles)
-        vehicleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.vehiclesSpinner.adapter = vehicleAdapter
+        */
 
         // Creation of the fuel spinner.
         ArrayAdapter.createFromResource(
@@ -231,10 +227,18 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<ArrayList<Vehicle>>, response: Response<ArrayList<Vehicle>>) {
                 if (response.isSuccessful) {
                     val vehiclesList = response.body()
+                    var vehicles: ArrayList<Vehicle> = ArrayList()
 
                     if (vehiclesList != null) {
-                        vehicles = vehiclesList
+                        for (vehicle in vehiclesList) {
+                            vehicles.add(vehicle)
+                        }
                     }
+
+                    // Creation of the vehicle spinner.
+                    val vehicleAdapter = ArrayAdapter(applicationContext, R.layout.color_spinner_layout, vehicles)
+                    vehicleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    binding.vehiclesSpinner.adapter = vehicleAdapter
                 } else
                     Toast.makeText(applicationContext, getString(R.string.error_response), Toast.LENGTH_SHORT).show()
             }
