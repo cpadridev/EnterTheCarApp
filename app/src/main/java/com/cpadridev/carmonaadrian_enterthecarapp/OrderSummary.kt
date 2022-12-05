@@ -8,14 +8,14 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import com.cpadridev.carmonaadrian_enterthecarapp.databinding.OrderSummaryBinding
+import com.cpadridev.carmonaadrian_enterthecarapp.databinding.ActivityOrderSummaryBinding
 
 
 /**
 @author: Adrian Carmona
  */
 class OrderSummary : AppCompatActivity() {
-    private lateinit var binding: OrderSummaryBinding
+    private lateinit var binding: ActivityOrderSummaryBinding
 
     // Create a variable "person". So we can share the same person for the different functions.
     private lateinit var person: Person
@@ -23,7 +23,7 @@ class OrderSummary : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = OrderSummaryBinding.inflate(layoutInflater)
+        binding = ActivityOrderSummaryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         if (intent.hasExtra(Intent.EXTRA_TEXT)) {

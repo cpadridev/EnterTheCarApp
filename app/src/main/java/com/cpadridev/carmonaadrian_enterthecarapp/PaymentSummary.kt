@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.cpadridev.carmonaadrian_enterthecarapp.connection.ApiEnterTheCar
 import com.cpadridev.carmonaadrian_enterthecarapp.connection.Client
-import com.cpadridev.carmonaadrian_enterthecarapp.databinding.PaymentSummaryBinding
+import com.cpadridev.carmonaadrian_enterthecarapp.databinding.ActivityPaymentSummaryBinding
 import com.cpadridev.carmonaadrian_enterthecarapp.model.Rental
 import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
@@ -21,7 +21,7 @@ import retrofit2.Retrofit
 @author: Adrian Carmona
  */
 class PaymentSummary : AppCompatActivity() {
-    private lateinit var binding: PaymentSummaryBinding
+    private lateinit var binding: ActivityPaymentSummaryBinding
     private lateinit var person: Person
 
     private var retrofit: Retrofit?= null
@@ -30,7 +30,7 @@ class PaymentSummary : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = PaymentSummaryBinding.inflate(layoutInflater)
+        binding = ActivityPaymentSummaryBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
 

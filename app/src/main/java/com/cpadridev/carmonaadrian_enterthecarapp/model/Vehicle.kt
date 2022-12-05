@@ -10,7 +10,6 @@ import com.google.gson.annotations.SerializedName
 data class Vehicle (@SerializedName("id") @Expose var id: Int?,
                     @SerializedName("type") @Expose var type: String,
                     @SerializedName("price") @Expose var price: Int,) {
-
     override fun toString(): String {
         return when (type) {
             "tourism" -> Resources.getSystem().getString(R.string.tourism)

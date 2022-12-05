@@ -9,18 +9,20 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.cpadridev.carmonaadrian_enterthecarapp.connection.ApiEnterTheCar
 import com.cpadridev.carmonaadrian_enterthecarapp.connection.Client
-import com.cpadridev.carmonaadrian_enterthecarapp.databinding.RentalsBinding
+import com.cpadridev.carmonaadrian_enterthecarapp.databinding.ActivityRentalsBinding
 import com.cpadridev.carmonaadrian_enterthecarapp.model.Rental
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 
+/**
+@author: Adrian Carmona
+ */
 class Rentals : AppCompatActivity() {
-    private lateinit var binding: RentalsBinding
+    private lateinit var binding: ActivityRentalsBinding
 
     private var retrofit: Retrofit? = null
     private var rentalAdapter: RentalAdapter? = null
@@ -28,7 +30,7 @@ class Rentals : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = RentalsBinding.inflate(layoutInflater)
+        binding = ActivityRentalsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val recycler = binding.ryvRentals

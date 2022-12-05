@@ -8,13 +8,13 @@ import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.cpadridev.carmonaadrian_enterthecarapp.databinding.PaymentFormBinding
+import com.cpadridev.carmonaadrian_enterthecarapp.databinding.ActivityPaymentFormBinding
 
 /**
 @author: Adrian Carmona
  */
 class PaymentForm : AppCompatActivity() {
-    private lateinit var binding: PaymentFormBinding
+    private lateinit var binding: ActivityPaymentFormBinding
     private lateinit var person: Person
 
     // "payment" is the same as that "person".
@@ -23,7 +23,7 @@ class PaymentForm : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = PaymentFormBinding.inflate(layoutInflater)
+        binding = ActivityPaymentFormBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
 
