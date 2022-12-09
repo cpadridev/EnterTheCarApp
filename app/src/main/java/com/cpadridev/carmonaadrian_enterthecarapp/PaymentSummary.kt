@@ -24,8 +24,8 @@ class PaymentSummary : AppCompatActivity() {
     private lateinit var binding: ActivityPaymentSummaryBinding
     private lateinit var person: Person
 
-    private var retrofit: Retrofit?= null
-    private var rentalAdapter: RentalAdapter ?=null
+    private var retrofit: Retrofit? = null
+    private var rentalAdapter: RentalAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

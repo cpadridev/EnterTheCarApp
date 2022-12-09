@@ -1,5 +1,6 @@
 package com.cpadridev.carmonaadrian_enterthecarapp
 
+import android.content.res.Resources
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,8 +36,8 @@ class RentalAdapter: RecyclerView.Adapter<RentalAdapter.MyViewHolder>() {
         viewHolder.txvId.text = list[position].id.toString()
         viewHolder.txvName.text = list[position].name
         viewHolder.txvVehicle.text = list[position].vehicle
-        viewHolder.txvDays.text = "Days: ${list[position].days}"
-        viewHolder.txvPrice.text = "Price: ${list[position].price}€"
+        viewHolder.txvDays.text = "${Resources.getSystem().getString(R.string.rent_days)} ${list[position].days}"
+        viewHolder.txvPrice.text = "${Resources.getSystem().getString(R.string.total_price)} ${list[position].price}€"
     }
 
     override fun getItemCount() = list.size
